@@ -3,35 +3,35 @@ import 'package:get/get.dart';
 
 final double _screenHeight = Get.height;
 final double _screenWidth = Get.width;
-final double _defaultPadding = 40.0;
-final double borderRadius = 50.0;
+const double _defaultPadding = 40.0;
+const double borderRadius = 50.0;
 
 const constScreenWidth = 411.42857142857144;
 const constScreenHeight = 820.5714285714286;
 
-const BorderRadius deepBorderRadius = const BorderRadius.all(
+const BorderRadius deepBorderRadius = BorderRadius.all(
   Radius.circular(50.0),
 );
-const BorderRadius lightBorderRadius = const BorderRadius.all(
+const BorderRadius lightBorderRadius = BorderRadius.all(
   Radius.circular(25.0),
 );
 
 double getRelativeScreenHeight(double factor) {
-  double screenHeight = _screenHeight;
+  final double screenHeight = _screenHeight;
   return factor * screenHeight / constScreenHeight;
 }
 
 double getRelativeScreenWidth(double factor) {
-  double screenWidth = _screenWidth;
+  final double screenWidth = _screenWidth;
   return factor * screenWidth / constScreenWidth;
 }
 
 double getHorizontalPadding(double factor) {
-  return (_defaultPadding * factor * _screenWidth / constScreenWidth);
+  return _defaultPadding * factor * _screenWidth / constScreenWidth;
 }
 
 double getVerticalPadding(double factor) {
-  return (_defaultPadding * factor * _screenHeight / constScreenHeight);
+  return _defaultPadding * factor * _screenHeight / constScreenHeight;
 }
 
 Widget paddingContainer({
