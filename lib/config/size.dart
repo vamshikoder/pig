@@ -4,57 +4,44 @@ import 'package:get/get.dart';
 final double _screenHeight = Get.height;
 final double _screenWidth = Get.width;
 const double _defaultPadding = 40.0;
-const double borderRadius = 50.0;
 
-const constScreenWidth = 411.42857142857144;
-const constScreenHeight = 820.5714285714286;
+const constScreenWidth = 392;
+const constScreenHeight = 781;
 
 const BorderRadius deepBorderRadius = BorderRadius.all(
-  Radius.circular(50.0),
-);
-const BorderRadius lightBorderRadius = BorderRadius.all(
   Radius.circular(25.0),
 );
-
-double getRelativeScreenHeight(double factor) {
+const BorderRadius lightBorderRadius = BorderRadius.all(
+  Radius.circular(12.50),
+);
+// gets relative screen width so that app look the same every where
+double rSHeight(double factor) {
   final double screenHeight = _screenHeight;
   return factor * screenHeight / constScreenHeight;
 }
 
-double getRelativeScreenWidth(double factor) {
+double rSWidth(double factor) {
   final double screenWidth = _screenWidth;
   return factor * screenWidth / constScreenWidth;
 }
 
-double getHorizontalPadding(double factor) {
+// returns a double and gets relative padding
+double hPadding(double factor) {
   return _defaultPadding * factor * _screenWidth / constScreenWidth;
 }
 
-double getVerticalPadding(double factor) {
+double vPadding(double factor) {
   return _defaultPadding * factor * _screenHeight / constScreenHeight;
 }
 
-Widget paddingContainer({
-  @required Widget child,
-  double hFactor = 1.0,
-  double vFactor = 0.0,
-}) {
-  return Padding(
-    padding: EdgeInsets.symmetric(
-      horizontal: (_defaultPadding * _screenWidth / constScreenWidth) * hFactor,
-      vertical: (_defaultPadding * _screenHeight / constScreenHeight) * vFactor,
-    ),
-    child: child,
-  );
-}
-
-Widget verticalSpacer({double factor = 1}) {
+// sized box with padding
+Widget vSpacer({double factor = 1}) {
   return SizedBox(
     height: (_defaultPadding * _screenHeight / constScreenHeight) * factor,
   );
 }
 
-Widget horizontalSpacer({double factor = 1}) {
+Widget hSpacer({double factor = 1}) {
   return SizedBox(
     width: (_defaultPadding * _screenWidth / constScreenWidth) * factor,
   );
