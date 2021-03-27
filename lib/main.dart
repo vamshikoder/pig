@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pig/widgets/global_utility_widgets.dart';
+import './widgets/global_utility_widgets.dart';
 import 'config/config.dart';
+// import './screens/home/ui/home.dart';
+// remove this comment and write the Home Screen code
 
 void main() => runApp(MyApp());
 
@@ -10,9 +12,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PIG',
       home: MyHomePage(),
+      // replace MyHomePage with Home...
     );
   }
 }
+
+// remove the below code
 
 class MyHomePage extends StatelessWidget {
   @override
