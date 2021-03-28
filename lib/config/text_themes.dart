@@ -22,7 +22,7 @@ Widget heading1(String text, {Color color = greyColor}) {
       fontFamily: 'Poppins',
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      letterSpacing: 5,
+      letterSpacing: 2.5,
     ),
   );
 }
