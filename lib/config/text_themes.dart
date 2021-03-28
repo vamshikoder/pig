@@ -1,30 +1,67 @@
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart';
+import 'colors.dart';
 
-// final TextStyle defaultTextStyle = GoogleFonts.comfortaa(
-//   color: Colors.black,
-//   fontSize: 15.0,
-//   fontWeight: FontWeight.normal,
-// );
+Widget heading(String text, {Color color = primaryColor}) {
+  return Text(
+    text.toUpperCase(),
+    style: TextStyle(
+      color: color,
+      fontFamily: 'Poppins',
+      fontSize: 30,
+      fontWeight: FontWeight.w900,
+      letterSpacing: 5,
+    ),
+  );
+}
 
-// Widget heading1(String text, {Color color = Colors.black}) {
-//   return Text(
-//     text.toUpperCase(),
-//     style: GoogleFonts.comfortaa(
-//       color: color,
-//       fontSize: 25.0,
-//       fontWeight: FontWeight.w900,
-//     ),
-//   );
-// }
+Widget heading1(String text, {Color color = greyColor}) {
+  return Text(
+    text.toUpperCase(),
+    style: TextStyle(
+      color: color,
+      fontFamily: 'Poppins',
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 5,
+    ),
+  );
+}
 
-// Widget heading2(String text, {Color color = Colors.black}) {
-//   return Text(
-//     text,
-//     style: GoogleFonts.comfortaa(
-//       color: color,
-//       fontSize: 15.0,
-//       fontWeight: FontWeight.w500,
-//     ),
-//   );
-// }
+Widget heading2(String text, {Color color = greyColor}) {
+  return Text(
+    text.toUpperCase(),
+    style: TextStyle(
+      color: color,
+      fontFamily: 'Poppins',
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 2.5,
+    ),
+  );
+}
+
+Widget subText(String text, {Color color = greyColor}) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: color,
+      fontFamily: 'Poppins',
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 2.5,
+    ),
+  );
+}
+
+Widget subTitle(String text, {Color color = greyColor}) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: color,
+      fontFamily: 'Poppins',
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 2.5,
+    ),
+  );
+}
