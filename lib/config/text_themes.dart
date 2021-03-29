@@ -40,7 +40,8 @@ Widget heading2(String text, {Color color = greyColor}) {
   );
 }
 
-Widget subText(String text, {Color color = greyColor}) {
+Widget subText(String text,
+    {Color color = greyColor, double letterSpacing = 1}) {
   return Text(
     text,
     style: TextStyle(
@@ -48,12 +49,13 @@ Widget subText(String text, {Color color = greyColor}) {
       fontFamily: 'Poppins',
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      letterSpacing: 2.5,
+      letterSpacing: letterSpacing,
     ),
   );
 }
 
-Widget subTitle(String text, {Color color = greyColor}) {
+Widget subTitle(String text,
+    {Color color = greyColor, double letterSpacing = 2.5}) {
   return Text(
     text,
     style: TextStyle(
@@ -61,7 +63,7 @@ Widget subTitle(String text, {Color color = greyColor}) {
       fontFamily: 'Poppins',
       fontSize: 12,
       fontWeight: FontWeight.w400,
-      letterSpacing: 2.5,
+      letterSpacing: letterSpacing,
     ),
   );
 }
