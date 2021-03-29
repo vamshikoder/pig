@@ -1,0 +1,32 @@
+{
+	"custom screen": {
+		"prefix": "CS",
+		"body": [
+			"CustomScreen(",
+			"title: 'title',",
+			"backArrow: (){},",
+			"rightChildren: const [",
+			"//your Widget",
+			"],",
+			"bottomChildren: const [],",
+			"body: const Text('Body Code'),",
+			"),",
+		],
+		"description": "creates the CustomScreen Widget",
+		"scope": "dart"
+	},
+	"sheet": {
+		"prefix": "sheet",
+		"body": [
+			"Sheet(",
+			"title: 'title',",
+			"arrowVisible: true,",
+			"height: rSHeight(100),",
+			"turns: 1.0,",
+			"child: const Text('sheet child'),",
+			"),",
+		],
+		"description": "creates the sheet",
+		"scope": "dart"
+	}
+}
