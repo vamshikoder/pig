@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:pig/config/config.dart';
 
 class PigDrawer extends StatefulWidget {
+  ///[menu] is the widget passed as an argument
   final Widget menu;
+
+  ///[scaffold] is the main page from which we swipe left to open drawer
   final Widget scaffold;
+
+  ///[controller] used to [open] or [close] and can also be used to
+  /// check the [state] of the [drawer]
   final PigDrawerController controller;
+
+  ///[backgroundColor] of the menu
   final Color backgroundColor;
-  final double cornerRadius;
 
   const PigDrawer({
     Key? key,
-
-    ///[menu] is the widget passed as an argument
     required this.menu,
-
-    ///[scaffold] is the main page from which we swipe left to open drawer
     required this.scaffold,
-
-    ///[controller] used to [open] or [close] and can also be used to
-    /// check the [state] of the [drawer]
     required this.controller,
     this.backgroundColor = Colors.white,
-    this.cornerRadius = 32.0,
   }) : super(key: key);
 
   @override
@@ -34,9 +33,10 @@ class _PigDrawerState extends State<PigDrawer> {
     super.initState();
   }
 
+  final double _cornerRadius = 32.0;
   Widget _renderContent() {
-    final slideAmount = 275.0 * widget.controller.percentOpen;
-    final cornerRadius = widget.cornerRadius * widget.controller.percentOpen;
+    final slideAmount = rSWidth(275.0) * widget.controller.percentOpen;
+    final cornerRadius = _cornerRadius * widget.controller.percentOpen;
 
     return Transform(
       transform: Matrix4.translationValues(slideAmount, 0.0, 0.0),
@@ -53,7 +53,8 @@ class _PigDrawerState extends State<PigDrawer> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(cornerRadius),
+          borderRadius:
+              BorderRadius.only(topRight: Radius.circular(cornerRadius)),
           child: GestureDetector(
             onTap: () {
               widget.controller.close();
@@ -74,18 +75,27 @@ class _PigDrawerState extends State<PigDrawer> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: widget.backgroundColor,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: hPadding(1),
-              vertical: vPadding(2),
-            ),
+        /// this is the [Menu] view
+        GestureDetector(
+          onTap: () {
+            widget.controller.close();
+          },
+          onHorizontalDragStart: (_) {
+            widget.controller.close();
+          },
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: widget.backgroundColor,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: hPadding(1),
+                vertical: vPadding(2),
+              ),
 
-            ///[menu] passed will be pushed here
-            child: widget.menu,
+              ///[menu] passed will be pushed here
+              child: widget.menu,
+            ),
           ),
         ),
         _renderContent()
@@ -153,6 +163,7 @@ class PigDrawerController extends ChangeNotifier {
     super.dispose();
   }
 
+  ///[open] is used to open the
   void open() {
     _animationController.forward();
   }
