@@ -78,37 +78,24 @@ class Sheet extends StatelessWidget {
   ///can be configured as needed using the below [parameters]
 
   /// provide the [Sheet] with the [title] which can used to specify the [contents] below the [sheet]
-  final String title;
+  final String? title;
 
   /// [height] determines the length of the [sheet].
   final double height;
 
-  /// [arrowVisible] takes a [bool] value which can be shown in case of sheets that needs to be [opened] and [closed]
-  final bool arrowVisible;
-
-  /// [turns] determine the angle at which the arrow should be rotated
-  final double turns;
-
   ///[child] this where all the [Widgets] under the [Sheet] should be written
   final Widget child;
 
-  ///[sheetTap] allows to perform some actions on tap of the sheet.
-  final Function? sheetTap;
-
-  //TODO need to implement ontap sheet expansion
   const Sheet({
     Key? key,
-    required this.title,
-    required this.arrowVisible,
+    this.title,
     required this.child,
-    required this.turns,
     required this.height,
-    this.sheetTap,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final double _screenWidth = Get.width;
-
+    final String _title = title ?? "";
     return Container(
       width: _screenWidth,
       height: height,
@@ -121,16 +108,9 @@ class Sheet extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            vSpacer(factor: 0.5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Heading1(title, color: black),
-                // hSpacer(),
-                if (arrowVisible) PigArrow(turns: turns) else const SizedBox()
-              ],
-            ),
-            vSpacer(factor: 0.5),
+            if (!_title.isBlank!) const VSpacer(sizeFactor: SizeFactor.half),
+            Heading1(_title, color: black),
+            if (!_title.isBlank!) const VSpacer(sizeFactor: SizeFactor.quater),
             child,
           ],
         ),
@@ -179,10 +159,11 @@ class CustomScaffold extends StatelessWidget {
     final String _title = title ?? '';
     final List<Widget> _extendedHead = extendedHead ?? const [SizedBox()];
     return Scaffold(
+      backgroundColor: white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          vSpacer(),
+          const VSpacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -235,7 +216,7 @@ class CustomScaffold extends StatelessWidget {
           PContainer(
             child: Column(children: _extendedHead),
           ),
-          vSpacer(factor: 0.5),
+          const VSpacer(sizeFactor: SizeFactor.half),
           body,
         ],
       ),
