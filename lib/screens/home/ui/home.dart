@@ -1,36 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pig/config/config.dart';
+import 'package:pig/widgets/global_utility_widgets.dart';
+import 'package:pig/widgets/pig_drawer.dart';
+import 'package:pig/widgets/pig_search_bar.dart';
 
-import '../../../config/config.dart';
-import '../../../widgets/global_utility_widgets.dart';
-import '../../../widgets/stacked_sheet.dart';
+///Don't forget to import [pigdrawer.dart] and [config.dart]
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-class Home extends StatelessWidget {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  late PigDrawerController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = PigDrawerController(vsync: this)
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final double _screenHeight = Get.height;
-    return CustomScaffold(
-      title: 'hello', // remove this line if you don't need a title
-      /// similar to [AppBar] in [Scaffold]
-      head: const [
-        //your AppBar Widgets
-      ],
+    return Material(
+      child: PigDrawer(
+          controller: _controller, menu: HomeMenu(), scaffold: HomeScaffold()),
+    );
+  }
+}
 
-      /// similar to [body] in [Scaffold]
-      body:
+///[PigDrawer] which wraps around [Home] and [Menu]
 
-          ///don't forget to import [stacked_sheets.dart] and [get.dart]
-          StackedSheets(
-        title1: 'title1',
-        title2: 'title2',
-        child1: const SubText('hello from title1'),
-        child2: const SubText('hello from title2'),
-
-        ///[height] factor must be [0.80] if is used as [body]
-        ///if there is any other [Widget] above [StackedSheets] configure [height] accordingly
-        ///don't forget to initialize [final double _screenHeight = Get.height;]
-        height: _screenHeight * 0.50,
+///implement your [Home] below.
+///[recommended] it is good to move [HomeScaffold] to different [file]
+class HomeScaffold extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    /// remove [Scaffold] use [CustomScaffold] instead
+    return const KeyboardDismissiableWrapper(
+      child: CustomScaffold(
+        body: Center(child: PigSearchBar()),
       ),
+    );
+  }
+}
+
+///implement your [Menu] below
+///[recommended] it is good to move [HomeMenu] to different [file]
+class HomeMenu extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    /// remove [Scaffold] use [CustomScaffold] instead
+    return const Scaffold(
+      body: Heading1('Home Menu'), // write your menu code here
     );
   }
 }
