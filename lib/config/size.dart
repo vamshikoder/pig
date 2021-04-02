@@ -34,15 +34,58 @@ double vPadding(double factor) {
   return _defaultPadding * factor * _screenHeight / constScreenHeight;
 }
 
-// sized box with padding
-Widget vSpacer({double factor = 1}) {
-  return SizedBox(
-    height: (_defaultPadding * _screenHeight / constScreenHeight) * factor,
-  );
+class VSpacer extends StatelessWidget {
+  final SizeFactor? sizeFactor;
+
+  const VSpacer({Key? key, this.sizeFactor}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    double _factor;
+    switch (sizeFactor) {
+      case SizeFactor.full:
+        _factor = 1;
+        break;
+      case SizeFactor.half:
+        _factor = 0.5;
+        break;
+      case SizeFactor.quater:
+        _factor = 0.25;
+        break;
+      default:
+        _factor = 1;
+    }
+    return SizedBox(
+      height: (_defaultPadding * _screenHeight / constScreenHeight) * _factor,
+    );
+  }
 }
 
-Widget hSpacer({double factor = 1}) {
-  return SizedBox(
-    width: (_defaultPadding * _screenWidth / constScreenWidth) * factor,
-  );
+class HSpacer extends StatelessWidget {
+  final SizeFactor? sizeFactor;
+
+  const HSpacer({Key? key, this.sizeFactor}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double _factor;
+    switch (sizeFactor) {
+      case SizeFactor.full:
+        _factor = 1;
+        break;
+      case SizeFactor.half:
+        _factor = 0.5;
+        break;
+      case SizeFactor.quater:
+        _factor = 0.25;
+        break;
+      default:
+        _factor = 1;
+    }
+
+    return SizedBox(
+      width: (_defaultPadding * _screenWidth / constScreenWidth) * _factor,
+    );
+  }
 }
+
+enum SizeFactor { full, half, quater }
