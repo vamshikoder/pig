@@ -28,11 +28,6 @@ class PigDrawer extends StatefulWidget {
 }
 
 class _PigDrawerState extends State<PigDrawer> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   final double _cornerRadius = 32.0;
   Widget _renderContent() {
     final slideAmount = rSWidth(275.0) * widget.controller.percentOpen;
