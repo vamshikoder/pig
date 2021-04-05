@@ -17,6 +17,7 @@ dependencies:
   flutter_riverpod: ^0.13.1+1
   get: ^4.1.1
   lint: ^1.5.3
+  syncfusion_flutter_calendar: ^19.1.54+1
 
 dev_dependencies:
   flutter_test:

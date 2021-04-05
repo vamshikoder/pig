@@ -74,8 +74,13 @@ class PContainer extends StatelessWidget {
   ///needs [padding] to be applied
   final Widget child;
   final SizeFactor? sizeFactor;
+  final bool? verticalPadding;
 
-  const PContainer({Key? key, required this.child, this.sizeFactor})
+  const PContainer(
+      {Key? key,
+      required this.child,
+      this.sizeFactor,
+      this.verticalPadding = false})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -91,11 +96,12 @@ class PContainer extends StatelessWidget {
         _factor = 0.25;
         break;
       default:
-        _factor = 1;
+        _factor = 0.5;
     }
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: hPadding(_factor),
+        vertical: verticalPadding! ? vPadding(_factor) : 0.0,
       ),
       child: child,
     );
@@ -138,7 +144,7 @@ class Sheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (!_title.isBlank!) const VSpacer(sizeFactor: SizeFactor.half),
-            Heading1(_title, color: black),
+            Heading2(_title, color: black),
             if (!_title.isBlank!) const VSpacer(sizeFactor: SizeFactor.quater),
             child,
           ],
@@ -194,7 +200,7 @@ class CustomScaffold extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: white,
         title: Heading(_title),
-        titleSpacing: hPadding(-0.4),
+        titleSpacing: backArrowTap == null ? hPadding(-0.8) : hPadding(-0.4),
         leading: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -235,120 +241,6 @@ class CustomScaffold extends StatelessWidget {
     );
   }
 }
-// class CustomScaffold extends StatelessWidget {
-//   ///[CustomScaffold] Should be used as the [body] of [Scaffold]
-//   ///this provides custom features which [AppBar] cannot provide.
-//   ///the App
-
-//   /// [head] acts like [AppBar] in [Scaffold] use this to add more elements to the top
-//   final List<Widget> head;
-
-//   ///[extendedHead] allows you to add more contents below [head]
-//   ///this is not necessary to write
-//   final List<Widget>? extendedHead;
-
-//   ///[title] describes the page that the user is in.
-//   final String? title;
-
-//   ///[body] is something similar to [body] in [Scaffold]
-//   final Widget body;
-
-//   ///this is a void function which tells what to do when the [backArrow] is [tapped]
-//   ///this can be used to tell the app to go back to the [previous screen]
-//   final VoidCallback? backArrowTap;
-
-//   const CustomScaffold({
-//     Key? key,
-//     required this.head,
-//     required this.body,
-//     this.title,
-//     this.extendedHead,
-//     this.backArrowTap,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final String _title = title ?? '';
-//     final List<Widget> _extendedHead = extendedHead ?? const [SizedBox()];
-//     final double _screenHeight = Get.height;
-//     return Scaffold(
-//       appBar: AppBar(),
-//       backgroundColor: white,
-//       body: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           SizedBox(
-//             height: rSHeight(56.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-
-//               ///[AppBar]
-//               children: [
-//                 // const VSpacer(
-//                 //   sizeFactor: SizeFactor.full,
-//                 // ),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     if (backArrowTap != null)
-//                       Row(
-//                         children: [
-//                           Padding(
-//                             padding: EdgeInsets.only(left: hPadding(0.25)),
-//                             child: InkWell(
-//                               focusColor: transparent,
-//                               splashColor: transparent,
-//                               highlightColor: transparent,
-//                               onTap: () {
-//                                 backArrowTap!();
-//                               },
-//                               child: const Icon(
-//                                 Icons.arrow_back_ios_rounded,
-//                                 color: primaryColor,
-//                                 size: 20,
-//                               ),
-//                             ),
-//                           ),
-//                           Padding(
-//                             padding: EdgeInsets.only(left: hPadding(0.20)),
-//                             child: Container(
-//                               color: white,
-//                               child: Heading(_title),
-//                             ),
-//                           ),
-//                         ],
-//                       )
-//                     else
-//                       Padding(
-//                         padding: EdgeInsets.only(
-//                           left: hPadding(0.95),
-//                         ),
-//                         child: Container(
-//                           color: white,
-//                           child: Heading(_title),
-//                         ),
-//                       ),
-//                     Padding(
-//                       padding: EdgeInsets.only(right: hPadding(0.5)),
-//                       child: Row(
-//                         children: head,
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 PContainer(
-//                   child: Column(children: _extendedHead),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           // const VSpacer(sizeFactor: SizeFactor.quater),
-//           body,
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class KeyboardDismissiableWrapper extends StatelessWidget {
   /// if there is any [TextFeild] then wrap the entire [screen] with this [Widget]

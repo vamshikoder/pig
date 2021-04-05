@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
 
 final double _screenHeight = Get.height;
 final double _screenWidth = Get.width;
 const double _defaultPadding = 40.0;
 
-const constScreenWidth = 392;
-const constScreenHeight = 781;
+///[PIXEL 4XL] size 411 / 820
+const constScreenWidth = 400.0;
+const constScreenHeight = 800.0;
 
 const BorderRadius deepBorderRadius = BorderRadius.all(
   Radius.circular(25.0),
@@ -15,14 +16,14 @@ const BorderRadius lightBorderRadius = BorderRadius.all(
   Radius.circular(12.50),
 );
 // gets relative screen width so that app look the same every where
-double rSHeight(double factor) {
+double rSHeight(double height) {
   final double screenHeight = _screenHeight;
-  return factor * screenHeight / constScreenHeight;
+  return height * screenHeight / constScreenHeight;
 }
 
-double rSWidth(double factor) {
+double rSWidth(double width) {
   final double screenWidth = _screenWidth;
-  return factor * screenWidth / constScreenWidth;
+  return width * screenWidth / constScreenWidth;
 }
 
 // returns a double and gets relative padding

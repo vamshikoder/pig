@@ -101,8 +101,8 @@
 		"body": [
 			" ///don't forget to import [stacked_sheets.dart]",
 			"          const StackedSheets(",
-			"            title1: 'title1$1',",
-			"            title2: 'title2',",
+			"            title1: '$1',",
+			"            title2: '$2',",
 			"            child1:  SubText('hello from title1'),",
 			"            child2:  SubText('hello from title2'),",
 			"            ///[heightFactor] must be [0.80] if is used as [body]",
@@ -119,12 +119,76 @@
 			"class $1 extends ConsumerWidget {",
 			"@override",
 			"Widget build(BuildContext context, ScopedReader watch) {",
-			"    return Container(",
-			"      ",
-			"    );",
+			"    return $2;",
 			"  }",
 			"}",
 		],
+		"scope": "dart"
+	},
+	"flutter column": {
+		"prefix": "fcol",
+		"body": [
+			"    Column(",
+			"      children: [$1]",
+			"    )$2"
+		],
+		"scope": "dart"
+	},
+	"flutter row": {
+		"prefix": "frow",
+		"body": [
+			"    Row(",
+			"      children: [$1]",
+			"    )$2"
+		],
+		"scope": "dart"
+	},
+	"flutter stack": {
+		"prefix": "fsta",
+		"body": [
+			"    Stack(",
+			"      children: [$1]",
+			"    )$2"
+		],
+		"scope": "dart"
+	},
+	"stateProvider": {
+		"prefix": "spro",
+		"body": [
+			"final $1StateProvider = StateProvider<$2>((ref) {",
+			"  return $3;",
+			"});"
+		],
+		"scope": "dart"
+	},
+	"stateNotifierProvider": {
+		"prefix": "snpro",
+		"body": [
+			"class $1Notifier extends StateNotifier<$2> {",
+			"  $1Notifier() : super($3);",
+			" ",
+			"}",
+			" ",
+			"final $4 $1StateProvider =",
+			"    StateNotifierProvider<$1Notifier>((ref) {",
+			"  return $1Notifier();",
+			"});",
+		],
+		"scope": "dart"
+	},
+	"import material.dart": {
+		"prefix": "impm",
+		"body": "import 'package:flutter/material.dart';",
+		"scope": "dart"
+	},
+	"import flutter_riverpod.dart": {
+		"prefix": "impri",
+		"body": "import 'package:flutter_riverpod/flutter_riverpod.dart';",
+		"scope": "dart"
+	},
+	"import route_manager.dart": {
+		"prefix": "impro",
+		"body": "import 'package:get/route_manager.dart';",
 		"scope": "dart"
 	}
 }

@@ -92,7 +92,7 @@ class _StackedSheetsState extends State<StackedSheets> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Heading1(widget.title1, color: black),
+                        Heading2(widget.title1, color: black),
                         AnimatedContainer(
                           duration: _animationDuration,
                           child: Transform.rotate(
@@ -128,7 +128,7 @@ class _StackedSheetsState extends State<StackedSheets> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Heading1(widget.title2, color: black),
+                          Heading2(widget.title2, color: black),
                           Transform.rotate(
                             angle: _angle2,
                             child: const PigArrow(turns: 1),
