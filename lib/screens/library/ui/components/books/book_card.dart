@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:pig/utils/date_time.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pig/models/book_model.dart';
+// import 'package:get/route_manager.dart';
 
 import '../../../../../config/config.dart';
-import '../../../../../models/notification_model.dart' as n;
 import '../../../../../widgets/global_utility_widgets.dart';
 
-class NotificationCard extends StatelessWidget {
-  final n.Notification notification;
+///import [flutter_riverpod.dart]
+class BookCard extends ConsumerWidget {
   final VoidCallback onTap;
-  const NotificationCard({
+  final Book book;
+  const BookCard({
     Key? key,
     required this.onTap,
-    required this.notification,
+    required this.book,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -28,11 +30,12 @@ class NotificationCard extends StatelessWidget {
               horizontal: hPadding(0.5),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  notification.title,
+                  book.bookName,
+                  // notification.title,
                   overflow: TextOverflow.fade,
                   maxLines: 2,
                   style: const TextStyle(
@@ -44,7 +47,7 @@ class NotificationCard extends StatelessWidget {
                   ),
                 ),
                 SubText(
-                  "${notification.time.day.toString()} ${months[notification.time.month - 1]} ${notification.time.year}",
+                  book.bookCode,
                   color: grey,
                   bold: true,
                 )

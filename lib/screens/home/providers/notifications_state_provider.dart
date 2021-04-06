@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/notification.dart' as n;
+import 'package:pig/models/notification_model.dart' as n;
 
 ///this provider gets the list of [notifications] that belongs to the [user]
 class NotificationsNotifier extends StateNotifier<List<n.Notification>> {

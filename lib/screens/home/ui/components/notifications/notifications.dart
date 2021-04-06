@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../config/config.dart';
 
-import '../../../../../data/dummie_notifications.dart';
+import '../../../../../data/dummie_notifications_data.dart';
 
 import '../../../../../widgets/global_utility_widgets.dart';
 
@@ -33,9 +33,10 @@ class Notifications extends ConsumerWidget {
           child: Row(
             ///[notification] is a [list] which contains all the [notifications]
             children: notifications.map(
-              (e) {
+              (val) {
                 return NotificationCard(
-                  notification: e,
+                  key: ObjectKey(val),
+                  notification: val,
                   onTap: () {
                     /// if there is already a notification is being shown or [postnotification] is [open]
                     /// it won't show the [NotificationOverview]
@@ -48,7 +49,7 @@ class Notifications extends ConsumerWidget {
                       ///this sends the values of the card clicked to the [NotificationOverview]
                       context
                           .read(notificationOverviewStateProvider)
-                          .selectNotification(e);
+                          .selectNotification(val);
                       // context.read(notificationOverviewAnimationStateProvider)
                     }
                   },

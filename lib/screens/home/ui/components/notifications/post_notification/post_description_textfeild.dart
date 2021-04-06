@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../../config/config.dart';
 
-import './post_notification_view.dart';
+import 'post_notification_view.dart';
 
 class PostDescriptionTextFeild extends ConsumerWidget {
   ///this is a [TextFeild] which allows the [user] to give the [notification] a [description]

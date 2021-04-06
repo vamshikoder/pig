@@ -10,8 +10,8 @@ import '../../../../../../widgets/global_utility_widgets.dart';
 
 import '../../../../providers/notifications_state_provider.dart';
 
-import './post_description_text_feild.dart';
-import './post_title_text_feild.dart';
+import 'post_description_textfeild.dart';
+import 'post_title_textfeild.dart';
 
 ///this contains the [title]
 final postTitleStateProvider = StateProvider<String>((ref) {

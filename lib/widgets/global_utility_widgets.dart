@@ -8,6 +8,7 @@ class CContainer extends StatelessWidget {
   /// [Size] and [decoration]
 
   final double? height;
+  final double? width;
 
   /// [color] specify the color of the [Container]
   final Color color;
@@ -24,6 +25,7 @@ class CContainer extends StatelessWidget {
     this.color = white,
     this.onTap,
     this.height = 125.0,
+    this.width = 125.0,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class CContainer extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: rSHeight(height!),
-        width: rSWidth(height!),
+        width: rSWidth(width!),
         decoration: BoxDecoration(
           color: color,
           borderRadius: lightBorderRadius,
@@ -94,6 +96,9 @@ class PContainer extends StatelessWidget {
         break;
       case SizeFactor.quater:
         _factor = 0.25;
+        break;
+      case SizeFactor.none:
+        _factor = 0.0;
         break;
       default:
         _factor = 0.5;
@@ -167,9 +172,9 @@ class CustomScaffold extends StatelessWidget {
   /// [head] acts like [AppBar] in [Scaffold] use this to add more elements to the top
   final List<Widget>? head;
 
-  ///[extendedHead] allows you to add more contents below [head]
-  ///this is not necessary to write
-  final List<Widget>? extendedHead;
+  // ///[extendedHead] allows you to add more contents below [head]
+  // ///this is not necessary to write
+  // final List<Widget>? extendedHead;
 
   ///[title] describes the page that the user is in.
   final String? title;
@@ -186,14 +191,13 @@ class CustomScaffold extends StatelessWidget {
     this.head,
     required this.body,
     this.title,
-    this.extendedHead,
+    // this.extendedHead,
     this.backArrowTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final String _title = title ?? '';
-    final List<Widget> _extendedHead = extendedHead ?? const [SizedBox()];
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -231,12 +235,7 @@ class CustomScaffold extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PContainer(
-            child: Column(children: _extendedHead),
-          ),
-          body
-        ],
+        children: [body],
       ),
     );
   }

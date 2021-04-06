@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pig/config/config.dart';
 import 'colors.dart';
 
 ///[Heading] mainly used for screen name
@@ -15,7 +16,7 @@ class Heading extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: 30,
+        fontSize: rSHeight(30),
         fontWeight: FontWeight.w900,
         letterSpacing: 2,
       ),
@@ -41,7 +42,7 @@ class Heading1 extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: 25,
+        fontSize: rSHeight(25),
         fontWeight: FontWeight.bold,
         letterSpacing: 2.0,
       ),
@@ -53,10 +54,12 @@ class Heading1 extends StatelessWidget {
 class Heading2 extends StatelessWidget {
   final String text;
   final Color color;
+  final double? letterSpacing;
   const Heading2(
     this.text, {
     Key? key,
     this.color = grey,
+    this.letterSpacing = 2.5,
   }) : super(key: key);
 
   @override
@@ -66,9 +69,9 @@ class Heading2 extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: 20,
+        fontSize: rSHeight(20),
         fontWeight: FontWeight.w600,
-        letterSpacing: 2.5,
+        letterSpacing: letterSpacing,
       ),
     );
   }
@@ -97,7 +100,7 @@ class SubText extends StatelessWidget {
       style: TextStyle(
         color: color,
         // fontFamily: 'Poppins',
-        fontSize: 16,
+        fontSize: rSHeight(16),
         fontWeight: bold! ? FontWeight.bold : FontWeight.w400,
         letterSpacing: letterSpacing,
       ),
@@ -125,7 +128,7 @@ class SubTitle extends StatelessWidget {
       style: TextStyle(
         color: color,
         // fontFamily: 'Poppins',
-        fontSize: 12,
+        fontSize: rSHeight(12),
         fontWeight: bold! ? FontWeight.bold : FontWeight.w400,
         letterSpacing: letterSpacing,
       ),

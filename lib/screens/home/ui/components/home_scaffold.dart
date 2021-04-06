@@ -18,6 +18,7 @@ import './notifications/notifications.dart';
 import './notifications/post_notification/post_notification_view.dart';
 
 import './pig_calendar.dart';
+import './pig_timetable.dart';
 
 class HomeScaffold extends ConsumerWidget {
   const HomeScaffold({
@@ -42,6 +43,7 @@ class HomeScaffold extends ConsumerWidget {
     final notificationOverviewState =
         watch(notificationOverviewStateProvider.state);
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         CustomScaffold(
           title: 'home',
@@ -54,14 +56,14 @@ class HomeScaffold extends ConsumerWidget {
                 color: grey,
               ),
               onPressed: () {
-                /// when [NotificationOverview] or [PostNotification] is not shown then
-                if (!showNotificationState & !showPostNotificationState) {
-                  Get.to(
-                    /// it pushes to [Chats] page.
-                    () => Chats(),
-                    transition: Transition.leftToRightWithFade,
-                  );
-                }
+                //// when [NotificationOverview] or [PostNotification] is not shown then
+                // if (!showNotificationState & !showPostNotificationState) {
+                Get.to(
+                  /// it pushes to [Chats] page.
+                  () => Chats(),
+                  transition: Transition.leftToRightWithFade,
+                );
+                //}
               },
             ),
 
@@ -74,13 +76,13 @@ class HomeScaffold extends ConsumerWidget {
                 color: grey,
               ),
               onPressed: () {
-                /// when [NotificationOverview] or [PostNotification] is not shown then
-                if (!showNotificationState & !showPostNotificationState) {
-                  /// it allows the [user] to open a [PostNotification]
-                  context
-                      .read(showPostNotificationStateProvider)
-                      .showPostNotification();
-                }
+                //// when [NotificationOverview] or [PostNotification] is not shown then
+                // if (!showNotificationState & !showPostNotificationState) {
+                //// it allows the [user] to open a [PostNotification]
+                context
+                    .read(showPostNotificationStateProvider)
+                    .showPostNotification();
+                // }
               },
             ),
             Padding(
@@ -125,7 +127,7 @@ class HomeScaffold extends ConsumerWidget {
 
                     ///[PigCalendar] shows a custom Calendar
                     child1: PigCalendar(),
-                    child2: SubText('hello from title2'),
+                    child2: PigTimeTable(),
                     heightFactor: 0.55,
                   ),
                 ),

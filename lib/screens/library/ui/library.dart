@@ -1,15 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/route_manager.dart';
+
+import '../../../config/config.dart';
+
 import '../../../widgets/global_utility_widgets.dart';
+import '../../../widgets/stacked_sheet.dart';
+
+import './components/books/recent_books.dart';
+import './components/books/recommended_books.dart';
+import './components/search_results.dart';
 
 class Library extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return const CustomScaffold(
-      title: 'library', // remove this line if you don't need a title
-
-      /// similar to [body] in [Scaffold]
-      body: Text('Body Code'),
+    return KeyboardDismissiableWrapper(
+      child: CustomScaffold(
+        title: 'library',
+        backArrowTap: () {
+          Get.back();
+        },
+        body: Expanded(
+          child: Stack(
+            children: [
+              const SearchResults(),
+              // Spacer(),
+              Positioned(
+                top: rSHeight(280),
+                child: const StackedSheets(
+                  title1: 'recommended',
+                  title2: 'recents',
+                  child1: RecommendedBooks(),
+                  child2: RecentBooks(),
+                  heightFactor: 0.45,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

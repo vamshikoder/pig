@@ -4,10 +4,11 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pig/utils/date_time.dart';
 
 import '../../../../../config/config.dart';
 
-import '../../../../../models/notification.dart' as n;
+import '../../../../../models/notification_model.dart' as n;
 
 import '../../../../../widgets/global_utility_widgets.dart';
 
@@ -78,7 +79,7 @@ class NotificationOverview extends ConsumerWidget {
 
                     ///this shows the [time] i.e the date of creation
                     Heading2(
-                        '${notification.time.day.toString()} ${n.months[notification.time.month - 1]} ${notification.time.year}'),
+                        '${notification.time.day.toString()} ${months[notification.time.month - 1]} ${notification.time.year}'),
 
                     ///this shows the [time] i.e the time of creation
                     SubText(

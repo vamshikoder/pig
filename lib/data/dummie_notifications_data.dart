@@ -1,4 +1,4 @@
-import '../models/notification.dart' as n;
+import '../models/notification_model.dart' as n;
 
 ///[title] max [16] characters
 ///[description] max [600] characters
@@ -48,5 +48,3 @@ List<n.Notification> notifications = [
     designation: 'Assistant Professor CSE',
   ),
 ];
-
-

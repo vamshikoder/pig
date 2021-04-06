@@ -10,10 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      /// [MaterialApp] extension so that navigation is simple pass [Get.to(Page())] for navigation
-      debugShowCheckedModeBanner: false,
-      title: 'PIG',
-      home: Home(),
-    );
+
+        /// [MaterialApp] extension so that navigation is simple pass [Get.to(Page())] for navigation
+        debugShowCheckedModeBanner: false,
+        title: 'PIG',
+        home: Home()
+        //     BookView(
+        //   book: books.first,
+        // ),
+        );
   }
 }

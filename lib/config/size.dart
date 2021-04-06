@@ -89,4 +89,4 @@ class HSpacer extends StatelessWidget {
   }
 }
 
-enum SizeFactor { full, half, quater }
+enum SizeFactor { full, half, quater, none }
