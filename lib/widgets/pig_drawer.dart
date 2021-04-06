@@ -3,7 +3,7 @@ import 'package:pig/config/config.dart';
 
 class PigDrawer extends StatefulWidget {
   ///[menu] is the widget passed as an argument
-  final Widget menu;
+  final Widget? menu;
 
   ///[scaffold] is the main page from which we swipe left to open drawer
   final Widget scaffold;
@@ -12,15 +12,18 @@ class PigDrawer extends StatefulWidget {
   /// check the [state] of the [drawer]
   final PigDrawerController controller;
 
+  final bool? scrollable;
+
   ///[backgroundColor] of the menu
   final Color backgroundColor;
 
   const PigDrawer({
     Key? key,
-    required this.menu,
+    this.menu,
     required this.scaffold,
     required this.controller,
     this.backgroundColor = Colors.white,
+    this.scrollable = true,
   }) : super(key: key);
 
   @override
@@ -52,10 +55,11 @@ class _PigDrawerState extends State<PigDrawer> {
               BorderRadius.only(topRight: Radius.circular(cornerRadius)),
           child: GestureDetector(
             onTap: () {
-              widget.controller.close();
+              if (widget.scrollable!) widget.controller.close();
             },
+
             onHorizontalDragStart: (_) {
-              widget.controller.open();
+              if (widget.scrollable!) widget.controller.open();
             },
 
             ///[scaffold] passed will be pushed here
@@ -73,10 +77,10 @@ class _PigDrawerState extends State<PigDrawer> {
         /// this is the [Menu] view
         GestureDetector(
           onTap: () {
-            widget.controller.close();
+            if (widget.scrollable!) widget.controller.close();
           },
           onHorizontalDragStart: (_) {
-            widget.controller.close();
+            if (widget.scrollable!) widget.controller.close();
           },
           child: Container(
             width: double.infinity,

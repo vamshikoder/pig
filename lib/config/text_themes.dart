@@ -16,7 +16,6 @@ class Heading extends StatelessWidget {
         color: color,
         fontFamily: 'Poppins',
         fontSize: 30,
-        // original 30
         fontWeight: FontWeight.w900,
         letterSpacing: 2,
       ),
@@ -28,16 +27,21 @@ class Heading extends StatelessWidget {
 class Heading1 extends StatelessWidget {
   final String text;
   final Color color;
-  const Heading1(this.text, {Key? key, this.color = grey}) : super(key: key);
+  const Heading1(
+    this.text, {
+    Key? key,
+    this.color = grey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text.toUpperCase(),
+      overflow: TextOverflow.fade,
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: FontWeight.bold,
         letterSpacing: 2.0,
       ),
@@ -49,7 +53,11 @@ class Heading1 extends StatelessWidget {
 class Heading2 extends StatelessWidget {
   final String text;
   final Color color;
-  const Heading2(this.text, {Key? key, this.color = grey}) : super(key: key);
+  const Heading2(
+    this.text, {
+    Key? key,
+    this.color = grey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +92,11 @@ class SubText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      overflow: TextOverflow.fade,
+      maxLines: 2,
       style: TextStyle(
         color: color,
-        fontFamily: 'Poppins',
+        // fontFamily: 'Poppins',
         fontSize: 16,
         fontWeight: bold! ? FontWeight.bold : FontWeight.w400,
         letterSpacing: letterSpacing,
@@ -114,7 +124,7 @@ class SubTitle extends StatelessWidget {
       text,
       style: TextStyle(
         color: color,
-        fontFamily: 'Poppins',
+        // fontFamily: 'Poppins',
         fontSize: 12,
         fontWeight: bold! ? FontWeight.bold : FontWeight.w400,
         letterSpacing: letterSpacing,

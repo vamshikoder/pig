@@ -39,8 +39,8 @@ class PigSearchBar extends StatelessWidget {
                 onSubmitted: onSubmitted,
                 decoration: InputDecoration(
                   hintText: hintText,
-                  hintStyle: const TextStyle(
-                    color: grey,
+                  hintStyle: TextStyle(
+                    color: grey.withOpacity(0.5),
                     fontFamily: 'Poppins',
                     fontSize: 12,
                     fontWeight: FontWeight.w400,

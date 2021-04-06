@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
 
 import './screens/home/ui/home.dart';
-import 'screens/home/ui/home.dart';
 
 void main() => runApp(ProviderScope(child: MyApp()));
 

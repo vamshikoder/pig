@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/config/config.dart';
-import 'package:pig/widgets/global_utility_widgets.dart';
-import 'package:pig/widgets/pig_drawer.dart';
-import 'package:pig/widgets/pig_search_bar.dart';
+
+import '../../../widgets/pig_drawer.dart';
+
+import '../providers/notifications_state_provider.dart';
+
+import './components/home_menu.dart';
+import './components/home_scaffold.dart';
 
 ///Don't forget to import [pigdrawer.dart] and [config.dart]
 class Home extends StatefulWidget {
@@ -30,37 +33,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: PigDrawer(
-          controller: _controller, menu: HomeMenu(), scaffold: HomeScaffold()),
-    );
+    return BuildHome(controller: _controller);
   }
 }
 
-///[PigDrawer] which wraps around [Home] and [Menu]
+class BuildHome extends ConsumerWidget {
+  const BuildHome({
+    Key? key,
+    required PigDrawerController controller,
+  })   : _controller = controller,
+        super(key: key);
 
-///implement your [Home] below.
-///[recommended] it is good to move [HomeScaffold] to different [file]
-class HomeScaffold extends ConsumerWidget {
+  final PigDrawerController _controller;
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    /// remove [Scaffold] use [CustomScaffold] instead
-    return const KeyboardDismissiableWrapper(
-      child: CustomScaffold(
-        body: Center(child: PigSearchBar()),
+    final showNotificationState = watch(showNotificationStateProvider.state);
+    final showPostNotificationState =
+        watch(showPostNotificationStateProvider.state);
+    return Material(
+      child: PigDrawer(
+        controller: _controller,
+        menu: const HomeMenu(key: ValueKey("homeMenu")),
+        scaffold: const HomeScaffold(key: ValueKey("homeScaffold")),
+        scrollable: !(showNotificationState | showPostNotificationState),
       ),
     );
   }
 }
 
-///implement your [Menu] below
-///[recommended] it is good to move [HomeMenu] to different [file]
-class HomeMenu extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    /// remove [Scaffold] use [CustomScaffold] instead
-    return const Scaffold(
-      body: Heading1('Home Menu'), // write your menu code here
-    );
-  }
-}
+///[PigDrawer] which wraps around [Home] and [Menu]
