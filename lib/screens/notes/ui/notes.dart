@@ -5,7 +5,7 @@ import '../../../widgets/global_utility_widgets.dart';
 class Notes extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return const CustomScaffold(
+    return const PigCustomScaffold(
       title: 'notes', // remove this line if you don't need a title
 
       /// similar to [body] in [Scaffold]

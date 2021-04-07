@@ -7,7 +7,7 @@ import '../../../widgets/global_utility_widgets.dart';
 class Settings extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return CustomScaffold(
+    return PigCustomScaffold(
       title: 'settings', // remove this line if you don't need a title
       /// similar to [body] in [Scaffold]
       backArrowTap: () {

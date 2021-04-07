@@ -1,3 +1,9 @@
+//* will be switched between authorized users and unauthorized
+//~ this the [Home] screen contains [Notification],[Calendar], [TimeTable],
+//~ it also contains [AppBar] with [Account],[Chats] Navigation
+//~ and also has a [PostNotification] button for authorized users
+//& Made by PIG
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -6,13 +12,17 @@ import 'package:get/route_manager.dart';
 
 import '../../../../config/config.dart';
 
+import '../../../../providers/user_state_provider.dart';
+
 import '../../../../screens/account/ui/account.dart';
 import '../../../../screens/chats/ui/chats.dart';
 
 import '../../../../widgets/global_utility_widgets.dart';
-import '../../../../widgets/stacked_sheet.dart';
+import '../../../../widgets/pig_stacked_sheet.dart';
 
 import '../../providers/notifications_state_provider.dart';
+
+import './notifications/auth_notifications.dart';
 import './notifications/notification_overview.dart';
 import './notifications/notifications.dart';
 import './notifications/post_notification/post_notification_view.dart';
@@ -25,14 +35,14 @@ class HomeScaffold extends ConsumerWidget {
     Key? key,
   }) : super(key: key);
 
-  ///this the [Home] screen contains [Notification],[Calendar], [TimeTable],
-  ///it also contains [AppBar] with [Account],[Chats] Navigation
-  ///and also has a [PostNotification] button
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     ///[showNotificationState] if there is any [NotificationOverview] is displayed or not.
     ///according to that it manages to show or do not show the [NotificatoinOverview] or not
     final showNotificationState = watch(showNotificationStateProvider.state);
+
+    //! This defines the [user] details like isManager or not do not remove or changed.
+    final userState = watch(userStateProvider.state);
 
     ///[showPostNotificationState] if there is [PostNotificationview] is displayed or not.
     ///according to that it manages to show or do not show the [PostNotificationview] or not
@@ -42,12 +52,35 @@ class HomeScaffold extends ConsumerWidget {
     /// according to [showNotificationState] it manages to show or do not show the [NotificatoinOverview] or not
     final notificationOverviewState =
         watch(notificationOverviewStateProvider.state);
+
+    /// according to [showAuthNotificationListState] it manages to show or do not show the [AuthNotificationList] or not
+    final showAuthNotificationsState =
+        watch(showAuthNotificationsStateProvider.state);
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        CustomScaffold(
+        PigCustomScaffold(
           title: 'home',
           head: [
+            /// only if user is [Authorized] show this [add] icons and be able to add [post/notifications]
+            if (userState.isAuthorized)
+              IconButton(
+                splashColor: transparent,
+                highlightColor: transparent,
+                icon: const Icon(
+                  Icons.add_box_outlined,
+                  color: grey,
+                ),
+                onPressed: () {
+                  /// it allows the [Authorized] to open a [PostNotification]
+                  context
+                      .read(showPostNotificationStateProvider)
+                      .showPostNotification();
+                  // }
+                },
+              )
+            else
+              Container(),
             IconButton(
               splashColor: transparent,
               highlightColor: transparent,
@@ -56,35 +89,14 @@ class HomeScaffold extends ConsumerWidget {
                 color: grey,
               ),
               onPressed: () {
-                //// when [NotificationOverview] or [PostNotification] is not shown then
-                // if (!showNotificationState & !showPostNotificationState) {
                 Get.to(
                   /// it pushes to [Chats] page.
                   () => Chats(),
                   transition: Transition.leftToRightWithFade,
                 );
-                //}
               },
             ),
 
-            ///only if user is [manager] show this [add] icons and be able to add [post/notifications]
-            IconButton(
-              splashColor: transparent,
-              highlightColor: transparent,
-              icon: const Icon(
-                Icons.add_box_outlined,
-                color: grey,
-              ),
-              onPressed: () {
-                //// when [NotificationOverview] or [PostNotification] is not shown then
-                // if (!showNotificationState & !showPostNotificationState) {
-                //// it allows the [user] to open a [PostNotification]
-                context
-                    .read(showPostNotificationStateProvider)
-                    .showPostNotification();
-                // }
-              },
-            ),
             Padding(
               padding: EdgeInsets.only(
                 right: hPadding(0.5),
@@ -121,7 +133,7 @@ class HomeScaffold extends ConsumerWidget {
                   top: rSHeight(210),
 
                   ///[StackedSheets] with calendar and timetable
-                  child: const StackedSheets(
+                  child: const PigStackedSheets(
                     title1: 'calendar',
                     title2: 'timetable',
 
@@ -149,6 +161,10 @@ class HomeScaffold extends ConsumerWidget {
         ///[else] it shows an empty [Container]
         if (showPostNotificationState)
           const PostNotificationView()
+        else
+          Container(),
+        if (showAuthNotificationsState)
+          const AuthNotifications()
         else
           Container()
       ],

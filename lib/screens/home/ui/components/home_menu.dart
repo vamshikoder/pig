@@ -1,25 +1,33 @@
+//~ Menu to the left which has Navigations to
+//~ Chats Library About Settings
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/route_manager.dart';
-import 'package:pig/config/config.dart';
-import 'package:pig/screens/about/ui/about.dart';
-import 'package:pig/screens/chats/ui/chats.dart';
-import 'package:pig/screens/library/ui/library.dart';
-import 'package:pig/screens/settings/ui/settings.dart';
 
-///implement your [Menu] below
-///[recommended] it is good to move [HomeMenu] to different [file]
+import '../../../../config/config.dart';
+
+import '../../../../screens/about/ui/about.dart';
+import '../../../../screens/chats/ui/chats.dart';
+import '../../../../screens/library/ui/library.dart';
+import '../../../../screens/settings/ui/settings.dart';
+
+import '../../../../widgets/pig_drawer.dart';
+
 class HomeMenu extends ConsumerWidget {
+  final PigDrawerController controller;
+
   const HomeMenu({
+    required this.controller,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    /// remove [Scaffold] use [CustomScaffold] instead
+    const Duration animationDuration = Duration(milliseconds: 250);
     return Scaffold(
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const VSpacer(
@@ -27,8 +35,13 @@ class HomeMenu extends ConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(() => Library(),
-                  transition: Transition.leftToRightWithFade);
+              /// This closes the [PigDrawer]
+              controller.close();
+              Get.to(
+                () => Library(),
+                duration: animationDuration,
+                transition: Transition.rightToLeftWithFade,
+              );
             },
             child: const Heading2(
               'Library',
@@ -40,7 +53,13 @@ class HomeMenu extends ConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(() => Chats(), transition: Transition.leftToRightWithFade);
+              /// This closes the [PigDrawer]
+              controller.close();
+              Get.to(
+                () => Chats(),
+                duration: animationDuration,
+                transition: Transition.rightToLeftWithFade,
+              );
             },
             child: const Heading2(
               'Chats',
@@ -52,8 +71,13 @@ class HomeMenu extends ConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.to(() => Settings(),
-                  transition: Transition.leftToRightWithFade);
+              /// This closes the [PigDrawer]
+              controller.close();
+              Get.to(
+                () => Settings(),
+                duration: animationDuration,
+                transition: Transition.rightToLeftWithFade,
+              );
             },
             child: const Heading2(
               'Settings',
@@ -63,7 +87,13 @@ class HomeMenu extends ConsumerWidget {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              Get.to(() => About(), transition: Transition.leftToRightWithFade);
+              /// This closes the [PigDrawer]
+              controller.close();
+              Get.to(
+                () => About(),
+                duration: animationDuration,
+                transition: Transition.rightToLeftWithFade,
+              );
             },
             child: const Heading2(
               'About Us',

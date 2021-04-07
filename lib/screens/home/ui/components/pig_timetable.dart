@@ -1,3 +1,7 @@
+//~ A custom TimeTable
+//TODO need to implement
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import '../../../../config/config.dart';
 

@@ -22,7 +22,7 @@ class BookCard extends ConsumerWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.only(right: hPadding(0.5)),
-        child: CContainer(
+        child: PigCube(
           // height: 125.0,
           child: Padding(
             padding: EdgeInsets.symmetric(

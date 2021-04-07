@@ -1,3 +1,7 @@
+//~ This is custom search bar made for PIG conatins all
+//~ the boiler plate code written
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:pig/config/config.dart';
 import 'package:get/route_manager.dart';
@@ -27,7 +31,7 @@ class PigSearchBar extends StatelessWidget {
       maxHeight: Get.height * 0.1,
       child: Column(
         children: [
-          PContainer(
+          PigPaddingContainer(
             sizeFactor: _sizeFactor,
             child: Container(
               height: rSHeight(50),
@@ -53,14 +57,14 @@ class PigSearchBar extends StatelessWidget {
                       letterSpacing: 1.0,
                     ),
                     suffixIcon: controller.text == ""
-                        ? PContainer(
+                        ? PigPaddingContainer(
                             sizeFactor: SizeFactor.half,
                             child: Icon(
                               getDisplayIcon(displayIcon!),
                               color: primaryColor,
                             ),
                           )
-                        : PContainer(
+                        : PigPaddingContainer(
                             sizeFactor: SizeFactor.half,
                             child: GestureDetector(
                               ///this is [onPressed] which calls a fucntion that clears the contents from [TextFeild]

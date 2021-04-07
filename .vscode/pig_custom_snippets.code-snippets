@@ -1,9 +1,9 @@
 {
 	"custom scaffold": {
-		"prefix": "customscaffold",
+		"prefix": "pcustomscaffold",
 		"body": [
 			" ///don't forget to import [global_utility_widgets.dart]",
-			" const CustomScaffold(",
+			" const PigCustomScaffold(",
 			"      title: '$1', // remove this line if you don't need a title",
 			"      /// similar to [AppBar] in [Scaffold]",
 			"      head: [",
@@ -18,9 +18,9 @@
 		"scope": "dart"
 	},
 	"sheet": {
-		"prefix": "sheet",
+		"prefix": "psheet",
 		"body": [
-			"Sheet(",
+			"PigSheet(",
 			"///custom [sheet] designed for [PIG]",
 			"///don't forget to import [config.dart]",
 			" title: '$1', //remove this line if you don't require title",
@@ -97,10 +97,10 @@
 		"scope": "dart"
 	},
 	"stacked sheets": {
-		"prefix": "stackedsheets",
+		"prefix": "pstackedsheets",
 		"body": [
 			" ///don't forget to import [stacked_sheets.dart]",
-			"          const StackedSheets(",
+			"          const PigStackedSheets(",
 			"            title1: '$1',",
 			"            title2: '$2',",
 			"            child1:  SubText('hello from title1'),",
@@ -175,6 +175,14 @@
 			"});",
 		],
 		"scope": "dart"
+	},
+	"create a watch for state provider": {
+		"prefix": "wpro",
+		"body": "final $1State = watch($1StateProvider.state);"
+	},
+	"create a watch for state Notifier provider": {
+		"prefix": "wnpro",
+		"body": "final $1State = watch($1StateProvider).state;"
 	},
 	"import material.dart": {
 		"prefix": "impm",

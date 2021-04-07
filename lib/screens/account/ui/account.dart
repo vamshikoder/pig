@@ -7,7 +7,7 @@ import '../../../widgets/global_utility_widgets.dart';
 class Account extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return CustomScaffold(
+    return PigCustomScaffold(
       title: 'account', // remove this line if you don't need a title
       backArrowTap: () => Get.back(),
 

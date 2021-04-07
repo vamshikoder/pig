@@ -1,3 +1,7 @@
+//~ This is a custom Wraper should be used to make a screen with
+//~ a menu attached to it.
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:pig/config/config.dart';
 

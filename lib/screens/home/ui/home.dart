@@ -1,3 +1,6 @@
+//~ here is where all the magic starts.
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,7 +11,6 @@ import '../providers/notifications_state_provider.dart';
 import './components/home_menu.dart';
 import './components/home_scaffold.dart';
 
-///Don't forget to import [pigdrawer.dart] and [config.dart]
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -54,12 +56,12 @@ class BuildHome extends ConsumerWidget {
     return Material(
       child: PigDrawer(
         controller: _controller,
-        menu: const HomeMenu(key: ValueKey("homeMenu")),
-        scaffold: const HomeScaffold(key: ValueKey("homeScaffold")),
+        menu: HomeMenu(
+          controller: _controller,
+        ),
+        scaffold: const HomeScaffold(),
         scrollable: !(showNotificationState | showPostNotificationState),
       ),
     );
   }
 }
-
-///[PigDrawer] which wraps around [Home] and [Menu]

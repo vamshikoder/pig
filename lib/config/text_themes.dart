@@ -1,6 +1,10 @@
+//~ This contains preconfigured text Themes for PIG
+//& Made by PIG
+
 import 'package:flutter/material.dart';
-import 'package:pig/config/config.dart';
+
 import 'colors.dart';
+import 'size.dart';
 
 ///[Heading] mainly used for screen name
 class Heading extends StatelessWidget {
@@ -42,7 +46,7 @@ class Heading1 extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: rSHeight(25),
+        fontSize: rSHeight(23),
         fontWeight: FontWeight.bold,
         letterSpacing: 2.0,
       ),
@@ -69,7 +73,7 @@ class Heading2 extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: rSHeight(20),
+        fontSize: rSHeight(18),
         fontWeight: FontWeight.w600,
         letterSpacing: letterSpacing,
       ),
@@ -100,7 +104,7 @@ class SubText extends StatelessWidget {
       style: TextStyle(
         color: color,
         // fontFamily: 'Poppins',
-        fontSize: rSHeight(16),
+        fontSize: rSHeight(15),
         fontWeight: bold! ? FontWeight.bold : FontWeight.w400,
         letterSpacing: letterSpacing,
       ),

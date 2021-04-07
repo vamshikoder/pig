@@ -1,3 +1,7 @@
+//^ Available only to authorized users
+//~ this is a [TextFeild] which allows the [user] to give the [notification] a [title]
+//& Made by PIG
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -8,7 +12,6 @@ import '../../../../../../config/config.dart';
 import 'post_notification_view.dart';
 
 class PostTitleTextFeild extends ConsumerWidget {
-  ///this is a [TextFeild] which allows the [user] to give the [notification] a [title]
   final TextEditingController controller;
 
   const PostTitleTextFeild({
@@ -28,10 +31,20 @@ class PostTitleTextFeild extends ConsumerWidget {
       keyboardType: TextInputType.text,
       controller: controller,
       textInputAction: TextInputAction.done,
-      maxLength: 16,
+      maxLength: 30,
       cursorColor: primaryColor,
       onChanged: (value) {
         addToTitle(context, value);
+      },
+      onEditingComplete: () {
+        validatePostTitle(context);
+
+        ///closes [keyboard] after clicking the [done] button on [keyboard]
+        final FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          currentFocus.focusedChild!.unfocus();
+        }
       },
       decoration: InputDecoration(
         ///when the [description] is invaild an [errorText] is shown

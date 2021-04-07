@@ -1,3 +1,7 @@
+//^ Available only to authorized users
+//~ This is a [TextFeild] which allows the [user] to give the [notification] a [description]
+//& Made by PIG
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -8,7 +12,6 @@ import '../../../../../../config/config.dart';
 import 'post_notification_view.dart';
 
 class PostDescriptionTextFeild extends ConsumerWidget {
-  ///this is a [TextFeild] which allows the [user] to give the [notification] a [description]
   final TextEditingController controller;
 
   const PostDescriptionTextFeild({
@@ -24,10 +27,20 @@ class PostDescriptionTextFeild extends ConsumerWidget {
     return TextField(
       controller: controller,
       textInputAction: TextInputAction.done,
-      maxLines: 8,
+      maxLines: 10,
       maxLength: 600,
       onChanged: (value) {
         addToDescription(context, value);
+      },
+      onEditingComplete: () {
+        validatePostDescription(context);
+
+        ///closes [keyboard] after clicking the [done] button on [keyboard]
+        final FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          currentFocus.focusedChild!.unfocus();
+        }
       },
       cursorColor: primaryColor,
       decoration: InputDecoration(

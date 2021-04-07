@@ -23,10 +23,10 @@ class ExtendedBookCard extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     return GestureDetector(
       onTap: onTap,
-      child: PContainer(
+      child: PigPaddingContainer(
         verticalPadding: true,
         sizeFactor: SizeFactor.quater,
-        child: CContainer(
+        child: PigCube(
           // height: 125.0,
           child: Padding(
             padding: EdgeInsets.symmetric(

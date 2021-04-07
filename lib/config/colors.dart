@@ -1,3 +1,6 @@
+//~ Contains all the Color Themes for PIG
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 
 const Color primaryColor = Color.fromRGBO(123, 237, 141, 1);

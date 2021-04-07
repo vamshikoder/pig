@@ -14,10 +14,10 @@ class ContentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> _contents = content ?? [""];
-    return PContainer(
+    return PigPaddingContainer(
       verticalPadding: true,
       sizeFactor: SizeFactor.quater,
-      child: CContainer(
+      child: PigCube(
         height: 150,
         width: double.infinity,
         child: Column(
@@ -26,7 +26,7 @@ class ContentCard extends StatelessWidget {
             const VSpacer(
               sizeFactor: SizeFactor.quater,
             ),
-            PContainer(
+            PigPaddingContainer(
               // verticalPadding: true,
               // sizeFactor: SizeFactor.half,
               child: SubText(
@@ -39,7 +39,7 @@ class ContentCard extends StatelessWidget {
               height: rSHeight(100),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                child: PContainer(
+                child: PigPaddingContainer(
                   verticalPadding: true,
                   sizeFactor: SizeFactor.quater,
                   child: Column(

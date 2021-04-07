@@ -1,3 +1,8 @@
+//~ This contains preconfigured Size which can be used
+//~ so that the application looks the same on all the
+//~ devices developer mobile used is PIXEL 4XL
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 

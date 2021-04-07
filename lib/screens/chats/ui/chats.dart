@@ -6,7 +6,7 @@ import '../../../widgets/global_utility_widgets.dart';
 class Chats extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return CustomScaffold(
+    return PigCustomScaffold(
       title: 'chats', // remove this line if you don't need a title
       /// similar to [body] in [Scaffold]
       backArrowTap: () => Get.back(),

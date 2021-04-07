@@ -18,7 +18,7 @@ class BookView extends ConsumerWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return CustomScaffold(
+    return PigCustomScaffold(
       title: 'Book',
       backArrowTap: () {
         Get.back();
@@ -29,7 +29,7 @@ class BookView extends ConsumerWidget {
           children: [
             Positioned(
               top: rSHeight(10),
-              child: Sheet(
+              child: PigSheet(
                 height: rSHeight(260),
                 child: Expanded(
                   child: Column(
@@ -93,7 +93,7 @@ class BookView extends ConsumerWidget {
             ),
             Positioned(
               top: rSHeight(250),
-              child: Sheet(
+              child: PigSheet(
                 title: 'contents',
                 height: Get.height * 0.58,
                 child: Expanded(

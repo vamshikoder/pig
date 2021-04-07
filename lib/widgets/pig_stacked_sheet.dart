@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../config/config.dart';
 import 'global_utility_widgets.dart';
 
-class StackedSheets extends StatefulWidget {
+class PigStackedSheets extends StatefulWidget {
   ///[title1] is the title of the first sheet
   final String title1;
 
@@ -20,7 +20,7 @@ class StackedSheets extends StatefulWidget {
 
   final double heightFactor;
 
-  const StackedSheets({
+  const PigStackedSheets({
     Key? key,
     required this.title1,
     required this.title2,
@@ -30,10 +30,10 @@ class StackedSheets extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _StackedSheetsState createState() => _StackedSheetsState();
+  _PigStackedSheetsState createState() => _PigStackedSheetsState();
 }
 
-class _StackedSheetsState extends State<StackedSheets> {
+class _PigStackedSheetsState extends State<PigStackedSheets> {
   static const _animationDuration = Duration(milliseconds: 250);
   final double _screenWidth = Get.width;
   final double _screenHeight = Get.height;
@@ -84,7 +84,7 @@ class _StackedSheetsState extends State<StackedSheets> {
                 borderRadius: lightBorderRadius,
                 boxShadow: boxShadow,
               ),
-              child: PContainer(
+              child: PigPaddingContainer(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -120,7 +120,7 @@ class _StackedSheetsState extends State<StackedSheets> {
                   borderRadius: lightBorderRadius,
                   boxShadow: boxShadow,
                 ),
-                child: PContainer(
+                child: PigPaddingContainer(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -12,7 +12,7 @@ List<n.Notification> notifications = [
     designation: 'Assistant Professor CSE',
   ),
   n.Notification(
-    title: 'hackathon c,c++ ',
+    title: 'abcdefghijklmnopqrstuvwxyzabcd',
     author: 'Jaya Bharathi',
     time: DateTime.now(),
     description:

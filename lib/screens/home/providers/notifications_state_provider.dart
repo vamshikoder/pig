@@ -1,6 +1,10 @@
+//~ This file provides all the state that is related to [Notifications]
+//& Made by PIG
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pig/models/notification_model.dart' as n;
 
+//* global providers
 ///this provider gets the list of [notifications] that belongs to the [user]
 class NotificationsNotifier extends StateNotifier<List<n.Notification>> {
   NotificationsNotifier() : super([]);
@@ -58,4 +62,18 @@ class ShowPostNotificationNotifier extends StateNotifier<bool> {
 final showPostNotificationStateProvider =
     StateNotifierProvider<ShowPostNotificationNotifier>((ref) {
   return ShowPostNotificationNotifier();
+});
+
+//^ Authorized providers
+//! DONOT MODIFY THESE!
+class ShowAuthNotificationsNotifier extends StateNotifier<bool> {
+  ShowAuthNotificationsNotifier() : super(false);
+  void showAuthNotifications() {
+    state = !state;
+  }
+}
+
+final showAuthNotificationsStateProvider =
+    StateNotifierProvider<ShowAuthNotificationsNotifier>((ref) {
+  return ShowAuthNotificationsNotifier();
 });

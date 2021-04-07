@@ -1,3 +1,7 @@
+//~ This is a notification card with title and date on it.
+//~ which is just a overview of the notification.
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:pig/utils/date_time.dart';
 
@@ -6,7 +10,11 @@ import '../../../../../models/notification_model.dart' as n;
 import '../../../../../widgets/global_utility_widgets.dart';
 
 class NotificationCard extends StatelessWidget {
+  /// notification class contains all parameters like [time] which can be used to
+  /// visualize the card
   final n.Notification notification;
+
+  /// onTap a [NotificationOverView] is shown.
   final VoidCallback onTap;
   const NotificationCard({
     Key? key,
@@ -20,7 +28,7 @@ class NotificationCard extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.only(right: hPadding(0.5)),
-        child: CContainer(
+        child: PigCube(
           // height: 125.0,
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -32,17 +40,20 @@ class NotificationCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
+                  ///[title] of the notification is shown here
                   notification.title,
                   overflow: TextOverflow.fade,
-                  maxLines: 2,
-                  style: const TextStyle(
+                  maxLines: 3,
+                  style: TextStyle(
                     color: black,
                     fontFamily: 'Poppins',
-                    fontSize: 16,
+                    fontSize: rSHeight(16),
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.0,
                   ),
                 ),
+
+                ///[time] of the notification is shown here
                 SubText(
                   "${notification.time.day.toString()} ${months[notification.time.month - 1]} ${notification.time.year}",
                   color: grey,

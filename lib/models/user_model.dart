@@ -1,16 +1,18 @@
-class People {
+//& Made by PIG
+
+class User {
   final String email;
   final String name;
-  final bool isManager;
+  final bool isAuthorized;
   final String branch;
   final int? year;
   final int? section;
   final String? hallticketNumber;
 
-  People({
+  User({
     required this.email,
     required this.name,
-    required this.isManager,
+    required this.isAuthorized,
     required this.branch,
     this.year,
     this.section,

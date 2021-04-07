@@ -1,5 +1,7 @@
+//& Made by PIG
+
 class Notification {
-  ///[title] max [16] characters
+  ///[title] max [30] characters
   final String title;
   final DateTime time;
 

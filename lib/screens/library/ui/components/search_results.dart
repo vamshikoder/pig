@@ -23,7 +23,7 @@ class SearchResults extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final recentSearchState = watch(recentSearchStateProvider).state;
     final searchResultsState = watch(searchResultsStateProvider.state);
-    return Sheet(
+    return PigSheet(
       title: 'search results',
       height: rSHeight(300),
       child: Column(

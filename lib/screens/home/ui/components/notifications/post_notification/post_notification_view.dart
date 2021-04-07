@@ -1,3 +1,8 @@
+//^ Available only to authorized users
+//~ This file is used to  create a overlay over the [HomeScaffold]
+//~ which shows the PostNotificationView which allows users to post notifications
+//& Made by PIG
+
 import 'dart:developer';
 import 'dart:ui';
 
@@ -52,7 +57,7 @@ class PostNotificationView extends ConsumerWidget {
     final Size _size = MediaQuery.of(context).size;
     final double _sHeight = _size.height;
 
-    return KeyboardDismissiableWrapper(
+    return PigKeyboardDismissiableWrapper(
       child: Container(
         color: transparent,
         height: _sHeight,
@@ -64,16 +69,16 @@ class PostNotificationView extends ConsumerWidget {
             sigmaY: 5,
           ),
           child: Center(
-            child: PContainer(
+            child: PigPaddingContainer(
               child: Container(
-                height: _sHeight * 0.6,
+                height: _sHeight * 0.7,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: white,
                   borderRadius: deepBorderRadius,
                   boxShadow: boxShadow,
                 ),
-                child: PContainer(
+                child: PigPaddingContainer(
                   verticalPadding: true,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -137,7 +142,7 @@ class PostNotificationViewCloseButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final postTitleState = watch(postTitleStateProvider).state;
-    final postDescriptionState = watch(postTitleStateProvider).state;
+    final postDescriptionState = watch(postDescriptionStateProvider).state;
     return IconButton(
       icon: const Icon(
         Icons.close_rounded,
@@ -146,7 +151,7 @@ class PostNotificationViewCloseButton extends ConsumerWidget {
       onPressed: () {
         ///This checks for the [title] and [description] [if] both of them are [not null]
         ///then it allows to [close] the [PostNotificationView]
-        if (postTitleState.isNotEmpty & postDescriptionState.isNotEmpty) {
+        if (postTitleState.isNotEmpty | postDescriptionState.isNotEmpty) {
           buildShowDialog(context);
         }
 
@@ -214,7 +219,10 @@ class PostActions extends ConsumerWidget {
         validatePostDescription(context);
 
         /// if the [title] and [description] are vaild then the [notification] is posted
-        if (postTitleValidationState & postDescriptionValidationState) {
+        if (postTitleValidationState &
+            postDescriptionValidationState &
+            postTitleState.isNotEmpty &
+            postDescriptionState.isNotEmpty) {
           log(postTitleState, name: "posted Title");
           log(postDescriptionState, name: "posted descr");
           //TODO function to post the notification to the database
@@ -237,11 +245,6 @@ class PostActions extends ConsumerWidget {
               content: Text('posted your notification'),
             ),
           );
-        } else {
-          //TODO when the value is empty need to show error
-          if (!postTitleValidationState) {}
-          if (!postDescriptionValidationState) {}
-          if (!postTitleValidationState & !postDescriptionValidationState) {}
         }
       },
       child: Container(
@@ -251,7 +254,7 @@ class PostActions extends ConsumerWidget {
           color: primaryColor,
           borderRadius: lightBorderRadius,
         ),
-        child: const PContainer(
+        child: const PigPaddingContainer(
           verticalPadding: true,
           sizeFactor: SizeFactor.quater,
           child: SubText(
@@ -290,34 +293,62 @@ void clearDescription(BuildContext context) {
 
 ///it validates the [title] using regular expressions
 void validatePostTitle(BuildContext context) {
-  final String title = context.read(postTitleStateProvider).state;
-  // .replaceAll(RegExp(r"\s\b|\b\s"), "");
+  log('validating title...', name: "post validation");
 
-  title.isEmpty
-      ? context.read(postTitleValidationStateProvider).state = false
-      : context.read(postTitleValidationStateProvider).state = true;
-  log(context.read(postTitleValidationStateProvider).state.toString(),
-      name: "title valid");
+  // final String title = context.read(postTitleStateProvider).state;
+  final String title =
+      context.read(postTitleStateProvider).state.replaceAll(RegExp(r'\s'), "");
+
+  if (title.isEmpty | (title == "")) {
+    context.read(postTitleValidationStateProvider).state = false;
+  } else {
+    context.read(postTitleValidationStateProvider).state = true;
+  }
+
+  if (context.read(postTitleValidationStateProvider).state) {
+    log(
+      "This is a valid post title",
+      name: "post validation",
+    );
+  } else {
+    log(
+      "",
+      name: "post validation",
+      error: "invaild post title",
+    );
+  }
 }
 
 ///it validates the [description] using regular expressions
 void validatePostDescription(BuildContext context) {
+  log('validating Description...', name: "post validation");
   final String description = context
       .read(postDescriptionStateProvider)
       .state
-      .replaceAll(RegExp(r"\s\b|\b\s"), "");
+      .replaceAll(RegExp(r"\s"), "");
 
-  description.isEmpty
-      ? context.read(postDescriptionValidationStateProvider).state = false
-      : context.read(postDescriptionValidationStateProvider).state = true;
-  log(context.read(postDescriptionValidationStateProvider).state.toString(),
-      name: "descr valid");
+  if (description.isEmpty | (description == "")) {
+    context.read(postDescriptionValidationStateProvider).state = false;
+  } else {
+    context.read(postDescriptionValidationStateProvider).state = true;
+  }
+  if (context.read(postDescriptionValidationStateProvider).state) {
+    log("This is a valid post description", name: "post validation");
+  } else {
+    log(
+      "",
+      name: "post validation",
+      error: "invaild post description",
+    );
+  }
 }
 
 ///makes the validation states to default i.e, [true]
 void defaultValidation(BuildContext context, {required bool values}) {
   context.read(postDescriptionValidationStateProvider).state = values;
   context.read(postTitleValidationStateProvider).state = values;
+  log("Making Providers to default", name: "post validation");
+  log("Making Editing Controllers to default", name: "post validation");
 }
 
 ///this shows an [AlertDialog] asks if the user wants to discard the post or not

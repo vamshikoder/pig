@@ -1,10 +1,17 @@
+//~ This file contains all the reusable Wigets that
+//~ are specifically made for PIG saves time and
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 
 import '../config/config.dart';
 
-class CContainer extends StatelessWidget {
-  /// [CContainer] is a basic [Container] with pre configured
+import '../providers/user_state_provider.dart';
+
+class PigCube extends StatelessWidget {
+  /// [PigCube] is a basic [Container] with pre configured
   /// [Size] and [decoration]
 
   final double? height;
@@ -16,10 +23,10 @@ class CContainer extends StatelessWidget {
   ///[onTap] specify the action that you want to perform.
   final VoidCallback? onTap;
 
-  /// [child] is the contents in the [CContainer]
+  /// [child] is the contents in the [PigCube]
   final Widget child;
 
-  const CContainer({
+  const PigCube({
     Key? key,
     required this.child,
     this.color = white,
@@ -68,8 +75,8 @@ class PigArrow extends StatelessWidget {
   }
 }
 
-class PContainer extends StatelessWidget {
-  ///[PContainer] is a custom container for [PIG]
+class PigPaddingContainer extends StatelessWidget {
+  ///[PigPaddingContainer] is a custom container for [PIG]
   ///with preconfigured [padding] for [PIG]
 
   ///[Pcontainer] takes [child] parameter to which
@@ -78,7 +85,7 @@ class PContainer extends StatelessWidget {
   final SizeFactor? sizeFactor;
   final bool? verticalPadding;
 
-  const PContainer(
+  const PigPaddingContainer(
       {Key? key,
       required this.child,
       this.sizeFactor,
@@ -113,27 +120,33 @@ class PContainer extends StatelessWidget {
   }
 }
 
-class Sheet extends StatelessWidget {
-  ///[Sheet] creates a container with preconfigured [Theme] and [Size] settings
+class PigSheet extends riverpod.ConsumerWidget {
+  ///[PigSheet] creates a container with preconfigured [Theme] and [Size] settings
   ///can be configured as needed using the below [parameters]
 
-  /// provide the [Sheet] with the [title] which can used to specify the [contents] below the [sheet]
+  /// provide the [PigSheet] with the [title] which can used to specify the [contents] below the [sheet]
   final String? title;
 
   /// [height] determines the length of the [sheet].
   final double height;
 
-  ///[child] this where all the [Widgets] under the [Sheet] should be written
+  ///[child] this where all the [Widgets] under the [PigSheet] should be written
   final Widget child;
+  final IconData? icon;
+  final VoidCallback? iconTap;
 
-  const Sheet({
+  const PigSheet({
     Key? key,
     this.title,
     required this.child,
     required this.height,
+    this.icon,
+    this.iconTap,
   }) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, riverpod.ScopedReader watch) {
+    //! This defines the [user] details like isManager or not do not remove or changed.
+    final userState = watch(userStateProvider.state);
     final double _screenWidth = Get.width;
     final String _title = title ?? "";
     return Container(
@@ -144,13 +157,34 @@ class Sheet extends StatelessWidget {
         borderRadius: lightBorderRadius,
         boxShadow: boxShadow,
       ),
-      child: PContainer(
+      child: PigPaddingContainer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (!_title.isBlank!) const VSpacer(sizeFactor: SizeFactor.half),
-            Heading2(_title, color: black),
-            if (!_title.isBlank!) const VSpacer(sizeFactor: SizeFactor.quater),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Heading2(_title, color: black),
+                if (icon != null)
+                  {
+                    IconButton(
+                      splashColor: transparent,
+                      highlightColor: transparent,
+                      icon: Icon(
+                        icon,
+                        color: grey,
+                      ),
+                      iconSize: rSHeight(25),
+                      onPressed: iconTap,
+                    ),
+                  }.toList().first,
+              ],
+            ),
+            if (userState.isAuthorized)
+              Container()
+            else
+              const VSpacer(sizeFactor: SizeFactor.quater),
             child,
           ],
         ),
@@ -164,17 +198,13 @@ class Sheet extends StatelessWidget {
 
 // }
 
-class CustomScaffold extends StatelessWidget {
-  ///[CustomScaffold] Should be used as the [body] of [Scaffold]
+class PigCustomScaffold extends StatelessWidget {
+  ///[PigCustomScaffold] Should be used as the [body] of [Scaffold]
   ///this provides custom features which [AppBar] cannot provide.
   ///the App
 
   /// [head] acts like [AppBar] in [Scaffold] use this to add more elements to the top
   final List<Widget>? head;
-
-  // ///[extendedHead] allows you to add more contents below [head]
-  // ///this is not necessary to write
-  // final List<Widget>? extendedHead;
 
   ///[title] describes the page that the user is in.
   final String? title;
@@ -186,7 +216,7 @@ class CustomScaffold extends StatelessWidget {
   ///this can be used to tell the app to go back to the [previous screen]
   final VoidCallback? backArrowTap;
 
-  const CustomScaffold({
+  const PigCustomScaffold({
     Key? key,
     this.head,
     required this.body,
@@ -241,11 +271,11 @@ class CustomScaffold extends StatelessWidget {
   }
 }
 
-class KeyboardDismissiableWrapper extends StatelessWidget {
+class PigKeyboardDismissiableWrapper extends StatelessWidget {
   /// if there is any [TextFeild] then wrap the entire [screen] with this [Widget]
   final Widget child;
 
-  const KeyboardDismissiableWrapper({Key? key, required this.child})
+  const PigKeyboardDismissiableWrapper({Key? key, required this.child})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

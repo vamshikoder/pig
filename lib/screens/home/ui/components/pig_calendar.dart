@@ -1,3 +1,6 @@
+//~ This is a custom calender.
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 

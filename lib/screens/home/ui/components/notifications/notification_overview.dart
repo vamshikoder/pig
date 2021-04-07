@@ -1,3 +1,6 @@
+//~ This shows the Overview of the [Notification] which is tapped
+//& Made by PIG
+
 import 'dart:ui';
 
 import 'package:intl/intl.dart';
@@ -15,7 +18,6 @@ import '../../../../../widgets/global_utility_widgets.dart';
 import '../../../providers/notifications_state_provider.dart';
 
 class NotificationOverview extends ConsumerWidget {
-  ///This shows the Overview of the [Notification] which is tapped
   final n.Notification notification;
 
   const NotificationOverview({
@@ -39,16 +41,16 @@ class NotificationOverview extends ConsumerWidget {
           sigmaY: 5,
         ),
         child: Center(
-          child: PContainer(
+          child: PigPaddingContainer(
             child: Container(
-              height: _sHeight * 0.6,
+              height: _sHeight * 0.7,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: white,
                 borderRadius: deepBorderRadius,
                 boxShadow: boxShadow,
               ),
-              child: PContainer(
+              child: PigPaddingContainer(
                 verticalPadding: true,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,6 +60,7 @@ class NotificationOverview extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: Heading1(
+                            /// [title] will be shown here
                             notification.title,
                             color: black,
                           ),
@@ -90,13 +93,14 @@ class NotificationOverview extends ConsumerWidget {
                       sizeFactor: SizeFactor.half,
                     ),
                     Text(
+                      ///[description] of the notification.
                       notification.description,
                       maxLines: 15,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: black,
                         // fontFamily: 'Poppins',
-                        fontSize: rSHeight(14.5),
+                        fontSize: rSHeight(14),
                         fontWeight: FontWeight.w400,
                         // letterSpacing: letterSpacing,
                         wordSpacing: 1.0,
