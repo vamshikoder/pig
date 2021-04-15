@@ -1,9 +1,10 @@
 //~ This file provides all the state that is related to [Notifications]
 //& Made by PIG
 // ignore_for_file: use_setters_to_change_properties
-//
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/notification/notification.dart' as n;
+
+import '../../../models/notification/notification.dart' as n;
 
 //* global providers
 ///this provider gets the list of [notifications] that belongs to the [user]
@@ -79,18 +80,23 @@ class AuthNotificationsNotifier extends StateNotifier<List<n.Notification>> {
   AuthNotificationsNotifier() : super([]);
 
   void initAuthNotifications(List<n.Notification> initialList) {
-    // TODO: any other editing on init
+    /// [fromServer] if connection exists
+    /// or [fromLocal]
+
     state = initialList;
   }
 
-  void addToAuthNotifications(n.Notification val) {
-    state.add(val);
-    //TODO: in the background to add these to the app storage
-    //TODO: also add this to the server.
+  void addToAuthNotifications(n.Notification notification) {
+    state.add(notification);
+
+    /// add [toServer] and [toLocal] functions.
   }
 
-  void subFromAuthNotifications(n.Notification val) =>
-      state.removeWhere((value) => value == val);
+  void subFromAuthNotifications(n.Notification notification) {
+    state.removeWhere((value) => value == notification);
+
+    /// delete [fromServer] and [fromLocal] functions.
+  }
 }
 
 final authNotificationsStateProvider =

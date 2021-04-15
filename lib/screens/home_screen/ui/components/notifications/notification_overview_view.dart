@@ -7,20 +7,21 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/utils/date_time.dart';
 
 import '../../../../../config/config.dart';
 
 import '../../../../../models/notification/notification.dart' as n;
 
+import '../../../../../utils/date_time.dart';
+
 import '../../../../../widgets/global_utility_widgets.dart';
 
 import '../../../providers/notifications_state_provider.dart';
 
-class NotificationOverview extends ConsumerWidget {
+class NotificationOverviewView extends ConsumerWidget {
   final n.Notification notification;
 
-  const NotificationOverview({
+  const NotificationOverviewView({
     Key? key,
     required this.notification,
   }) : super(key: key);

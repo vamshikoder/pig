@@ -1,5 +1,5 @@
 import '../models/book/book.dart';
-import '../models/borrowed_book.dart/borrowed_book.dart';
+import '../models/borrowed_book/borrowed_book.dart';
 
 final List<BorrowedBook> recentBooks = [
   BorrowedBook(

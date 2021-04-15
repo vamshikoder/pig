@@ -7,7 +7,8 @@ import '../../../../../config/config.dart';
 import '../../../../../models/book/book.dart';
 
 import '../../../../../widgets/global_utility_widgets.dart';
-import 'content_tile.dart';
+
+import './content_tile.dart';
 
 class BookScreen extends ConsumerWidget {
   final Book book;

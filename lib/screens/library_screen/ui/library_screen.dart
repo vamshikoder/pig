@@ -7,9 +7,9 @@ import '../../../config/config.dart';
 import '../../../widgets/global_utility_widgets.dart';
 import '../../../widgets/pig_stacked_sheet.dart';
 
-import 'components/books/recent_books.dart';
-import 'components/books/recommended_books.dart';
-import 'components/search_results.dart';
+import './components/books/recent_books.dart';
+import './components/books/recommended_books.dart';
+import './components/search_results.dart';
 
 class LibraryScreen extends ConsumerWidget {
   @override

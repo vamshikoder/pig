@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../../config/config.dart';
 
-import 'post_notification_view.dart';
+import './post_notification_view.dart';
 
 class PostTitleTextFeild extends ConsumerWidget {
   final TextEditingController controller;

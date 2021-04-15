@@ -8,13 +8,17 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:pig/utils/date_time.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../config/config.dart';
 
 import '../../../../../models/notification/notification.dart' as n;
 
+import '../../../../../utils/date_time.dart';
+
 import '../../../../../widgets/pig_expansion_tile.dart';
+
+import '../../../providers/notifications_state_provider.dart';
 
 class AuthNotificationTile extends StatelessWidget {
   final n.Notification notification;
@@ -43,7 +47,10 @@ class AuthNotificationTile extends StatelessWidget {
               //   log("Edit the notification");
               //   break;
               case DismissDirection.startToEnd:
-                log("delete the notification");
+                context
+                    .read(authNotificationsStateProvider)
+                    .subFromAuthNotifications(notification);
+                log("deleted the notification");
                 break;
             }
           },

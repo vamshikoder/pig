@@ -3,10 +3,13 @@
 //& Made by PIG
 
 import 'package:flutter/material.dart';
-import 'package:pig/utils/date_time.dart';
 
 import '../../../../../config/config.dart';
+
 import '../../../../../models/notification/notification.dart' as n;
+
+import '../../../../../utils/date_time.dart';
+
 import '../../../../../widgets/global_utility_widgets.dart';
 
 class NotificationCard extends StatelessWidget {

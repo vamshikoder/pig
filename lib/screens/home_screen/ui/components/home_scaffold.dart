@@ -23,8 +23,8 @@ import '../../../../widgets/pig_stacked_sheet.dart';
 
 import '../../providers/notifications_state_provider.dart';
 
-import './notifications/auth_notifications.dart';
-import './notifications/notification_overview.dart';
+import './notifications/auth_notifications_view.dart';
+import './notifications/notification_overview_view.dart';
 import './notifications/notifications.dart';
 import './notifications/post_notification/post_notification_view.dart';
 
@@ -160,7 +160,7 @@ class HomeScaffold extends ConsumerWidget {
         ///[if] any [NotificationCard] is tapped then it opens the [NotificationOverView]
         ///[else] it shows an empty [Container]
         if (showNotificationState)
-          NotificationOverview(
+          NotificationOverviewView(
             notification: notificationOverviewState,
           )
         else
@@ -173,7 +173,7 @@ class HomeScaffold extends ConsumerWidget {
         else
           Container(),
         if (showAuthNotificationsState)
-          const AuthNotifications()
+          const AuthNotificationsView()
         else
           Container(),
         if (scaffoldBlockState)

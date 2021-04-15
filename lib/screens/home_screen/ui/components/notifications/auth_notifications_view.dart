@@ -16,14 +16,16 @@ import '../../../../../widgets/global_utility_widgets.dart';
 
 import '../../../providers/notifications_state_provider.dart';
 
-import '../notifications/auth_notification_tile.dart';
+import './auth_notification_tile.dart';
 
-class AuthNotifications extends ConsumerWidget {
-  const AuthNotifications({
+class AuthNotificationsView extends ConsumerWidget {
+  const AuthNotificationsView({
     Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    // ignore: unused_local_variable
+    final authNotificationsState = watch(authNotificationsStateProvider.state);
     final Size _size = MediaQuery.of(context).size;
     final double _sHeight = _size.height;
     return Container(
@@ -84,7 +86,7 @@ class AuthNotifications extends ConsumerWidget {
                             color: errorColor,
                           ),
                           onPressed: () {
-                            ///this closes the [Notification Overview]
+                            ///this closes the [Auth Notifications List]
                             context
                                 .read(showAuthNotificationsStateProvider)
                                 .showAuthNotifications();
@@ -99,8 +101,17 @@ class AuthNotifications extends ConsumerWidget {
                         clipBehavior: Clip.antiAlias,
                         physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.all(8.0),
+                        //* use this for real data that need to be passed to the APP
+                        // children: authNotificationsState.map((val) {
+                        //   return AuthNotificationTile(notification: val);
+                        // }).toList(),
+
+                        //! THIS IS DUMMY DATA FROM [DATA] FOLDER
                         children: notifications.map((val) {
-                          return AuthNotificationTile(notification: val);
+                          return AuthNotificationTile(
+                            key: ObjectKey(val),
+                            notification: val,
+                          );
                         }).toList(),
                       ),
                     ),

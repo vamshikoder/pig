@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/route_manager.dart';
+
 import '../../../widgets/global_utility_widgets.dart';
 
 class ChatsScreen extends ConsumerWidget {

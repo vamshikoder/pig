@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../config/config.dart';
 
 class SplashScreen extends StatelessWidget {

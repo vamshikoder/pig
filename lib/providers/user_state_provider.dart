@@ -2,7 +2,8 @@
 //& Made by PIG
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/user/user.dart';
+
+import '../models/user/user.dart';
 
 class UserNotifier extends StateNotifier<User> {
   UserNotifier()

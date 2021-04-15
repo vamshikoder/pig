@@ -8,8 +8,8 @@ import '../../../widgets/pig_drawer.dart';
 
 import '../providers/notifications_state_provider.dart';
 
-import 'components/home_menu.dart';
-import 'components/home_scaffold.dart';
+import './components/home_menu.dart';
+import './components/home_scaffold.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
