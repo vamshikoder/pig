@@ -3,6 +3,8 @@
 //& Made by PIG
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:pig/config/config.dart';
 
 class PigDrawer extends StatefulWidget {
@@ -36,12 +38,15 @@ class PigDrawer extends StatefulWidget {
 
 class _PigDrawerState extends State<PigDrawer> {
   final double _cornerRadius = 32.0;
-  Widget _renderContent() {
+  Widget _renderContent(BuildContext context) {
     final slideAmount = rSWidth(275.0) * widget.controller.percentOpen;
+    // final scaleAmount = rSHeight(500) * widget.controller.percentOpen;
     final cornerRadius = _cornerRadius * widget.controller.percentOpen;
 
     return Transform(
       transform: Matrix4.translationValues(slideAmount, 0.0, 0.0),
+      // ..scale(0, scaleAmount, 0),
+      // ..
       alignment: Alignment.centerLeft,
       child: Container(
         decoration: BoxDecoration(
@@ -59,11 +64,11 @@ class _PigDrawerState extends State<PigDrawer> {
               BorderRadius.only(topRight: Radius.circular(cornerRadius)),
           child: GestureDetector(
             onTap: () {
-              if (widget.scrollable!) widget.controller.close();
+              if (widget.scrollable!) widget.controller.close(context);
             },
 
             onHorizontalDragStart: (_) {
-              if (widget.scrollable!) widget.controller.open();
+              if (widget.scrollable!) widget.controller.open(context);
             },
 
             ///[scaffold] passed will be pushed here
@@ -81,10 +86,10 @@ class _PigDrawerState extends State<PigDrawer> {
         /// this is the [Menu] view
         GestureDetector(
           onTap: () {
-            if (widget.scrollable!) widget.controller.close();
+            if (widget.scrollable!) widget.controller.close(context);
           },
           onHorizontalDragStart: (_) {
-            if (widget.scrollable!) widget.controller.close();
+            if (widget.scrollable!) widget.controller.close(context);
           },
           child: Container(
             width: double.infinity,
@@ -101,7 +106,7 @@ class _PigDrawerState extends State<PigDrawer> {
             ),
           ),
         ),
-        _renderContent()
+        _renderContent(context)
       ],
     );
   }
@@ -167,13 +172,31 @@ class PigDrawerController extends ChangeNotifier {
   }
 
   ///[open] is used to open the
-  void open() {
+  void open(BuildContext context) {
+    context.read(scaffoldBlockStateProvider).blockScaffold();
     _animationController.forward();
   }
 
-  void close() {
+  void close(BuildContext context) {
+    context.read(scaffoldBlockStateProvider).unblockScaffold();
     _animationController.reverse();
   }
 }
 
 enum PigDrawerState { open, closed, opening, closing }
+
+class ScaffoldBlockNotifier extends StateNotifier<bool> {
+  ScaffoldBlockNotifier() : super(false);
+  void blockScaffold() {
+    state = true;
+  }
+
+  void unblockScaffold() {
+    state = false;
+  }
+}
+
+final scaffoldBlockStateProvider =
+    StateNotifierProvider<ScaffoldBlockNotifier>((ref) {
+  return ScaffoldBlockNotifier();
+});

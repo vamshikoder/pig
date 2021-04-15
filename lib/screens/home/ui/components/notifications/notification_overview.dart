@@ -11,7 +11,7 @@ import 'package:pig/utils/date_time.dart';
 
 import '../../../../../config/config.dart';
 
-import '../../../../../models/notification_model.dart' as n;
+import '../../../../../models/notification/notification.dart' as n;
 
 import '../../../../../widgets/global_utility_widgets.dart';
 

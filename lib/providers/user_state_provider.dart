@@ -2,26 +2,26 @@
 //& Made by PIG
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/user_model.dart';
+import 'package:pig/models/user/user.dart';
 
 class UserNotifier extends StateNotifier<User> {
   UserNotifier()
-      : super(User(
+      : super(const User(
           email: "",
           name: "",
-          isAuthorized: false,
-          branch: 'CSE',
+          isAuthorized: true,
+          scope: 'CSE',
         ));
 
   void setUser() {
     ///[function] which gets the user details from app storage.
     ///on [App] start.
     ///this cannot be changed.
-    state = User(
+    state = const User(
       email: "",
       name: "",
       isAuthorized: true,
-      branch: 'CSE',
+      scope: 'CSE',
     );
   }
 }

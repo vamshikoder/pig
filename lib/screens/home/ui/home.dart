@@ -59,7 +59,9 @@ class BuildHome extends ConsumerWidget {
         menu: HomeMenu(
           controller: _controller,
         ),
-        scaffold: const HomeScaffold(),
+        scaffold: HomeScaffold(
+          controller: _controller,
+        ),
         scrollable: !(showNotificationState | showPostNotificationState),
       ),
     );

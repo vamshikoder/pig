@@ -1,10 +1,10 @@
-import '../models/book_model.dart';
-import '../models/borrowed_book_model.dart';
+import '../models/book/book.dart';
+import '../models/borrowed_book.dart/borrowed_book.dart';
 
 final List<BorrowedBook> recentBooks = [
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
-    book: Book(
+    book: const Book(
       bookName:
           'Principles, Techniques and Tools, Second Edition, Alfred V. Aho, Monica S. Lam, Ravi Sethi, Jeffry D. Ullman, Pearson',
       bookCode: 'somecode',
@@ -13,7 +13,7 @@ final List<BorrowedBook> recentBooks = [
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
-    book: Book(
+    book: const Book(
       bookName: 'mechnaical',
       bookCode: 'ksf98',
     ),
@@ -21,7 +21,7 @@ final List<BorrowedBook> recentBooks = [
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
-    book: Book(
+    book: const Book(
       bookName: 'elecritcal',
       bookCode: 'jk8sf',
     ),
@@ -29,7 +29,7 @@ final List<BorrowedBook> recentBooks = [
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
-    book: Book(
+    book: const Book(
       bookName: 'mbbs',
       bookCode: '13sfs',
     ),
@@ -37,7 +37,7 @@ final List<BorrowedBook> recentBooks = [
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
-    book: Book(
+    book: const Book(
       bookName: 'scientist',
       bookCode: 'fsd3sf',
     ),
@@ -45,7 +45,7 @@ final List<BorrowedBook> recentBooks = [
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
-    book: Book(
+    book: const Book(
       bookName: 'aminator',
       bookCode: '33sfs',
     ),

@@ -1,11 +1,35 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:pig/providers/user_state_provider.dart';
 
 import '../config/config.dart';
 import 'global_utility_widgets.dart';
 
-class PigStackedSheets extends StatefulWidget {
+final angleOneStateProvider = StateProvider<double>((ref) {
+  return 0 * pi / 180;
+});
+final angleTwoStateProvider = StateProvider<double>((ref) {
+  return 180 * pi / 180;
+});
+
+final heightStateProvider = StateProvider<double>((ref) {
+  return rSHeight(60);
+});
+void forward1(BuildContext context, double heightFactor) {
+  context.read(angleOneStateProvider).state = 180 * pi / 180;
+  context.read(angleTwoStateProvider).state = 0 * pi / 180;
+  context.read(heightStateProvider).state = Get.height * heightFactor;
+}
+
+void backward1(BuildContext context) {
+  context.read(angleOneStateProvider).state = 0 * pi / 180;
+  context.read(angleTwoStateProvider).state = 180 * pi / 180;
+  context.read(heightStateProvider).state = rSHeight(60);
+}
+
+class PigStackedSheets extends ConsumerWidget {
   ///[title1] is the title of the first sheet
   final String title1;
 
@@ -17,8 +41,9 @@ class PigStackedSheets extends StatefulWidget {
 
   ///[child2] provide child to the [sheet2]
   final Widget child2;
-
   final double heightFactor;
+  final IconData? icon;
+  final VoidCallback? iconTap;
 
   const PigStackedSheets({
     Key? key,
@@ -27,46 +52,26 @@ class PigStackedSheets extends StatefulWidget {
     required this.child1,
     required this.child2,
     required this.heightFactor,
+    this.icon,
+    this.iconTap,
   }) : super(key: key);
 
-  @override
-  _PigStackedSheetsState createState() => _PigStackedSheetsState();
-}
-
-class _PigStackedSheetsState extends State<PigStackedSheets> {
   static const _animationDuration = Duration(milliseconds: 250);
-  final double _screenWidth = Get.width;
-  final double _screenHeight = Get.height;
-
-  double _angle1 = 0 * pi / 180;
-  double _angle2 = 180 * pi / 180;
-
-  double top = rSHeight(60);
-
-  void forward() {
-    setState(() {
-      _angle1 = 180 * pi / 180;
-      _angle2 = 0 * pi / 180;
-      top = _screenHeight * widget.heightFactor;
-    });
-  }
-
-  void reverse() {
-    setState(() {
-      _angle1 = 0 * pi / 180;
-      _angle2 = 180 * pi / 180;
-      top = rSHeight(60);
-    });
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final userState = watch(userStateProvider.state);
+    final angleOneState = watch(angleOneStateProvider).state;
+    final angleTwoState = watch(angleTwoStateProvider).state;
+    final heightState = watch(heightStateProvider).state;
+    final double _screenWidth = Get.width;
+    final double _screenHeight = Get.height;
+
     return GestureDetector(
       onTap: () {
-        if (_angle1 > 0) {
-          reverse();
+        if (angleOneState > 0) {
+          backward1(context);
         } else {
-          forward();
+          forward1(context, heightFactor);
         }
       },
       child: LimitedBox(
@@ -78,7 +83,7 @@ class _PigStackedSheetsState extends State<PigStackedSheets> {
               width: _screenWidth,
 
               ///[25.0] is to overflow the [sheet1] into the below [sheet2]
-              height: _screenHeight * widget.heightFactor + 25.0,
+              height: _screenHeight * heightFactor + 25.0,
               decoration: const BoxDecoration(
                 color: white,
                 borderRadius: lightBorderRadius,
@@ -92,24 +97,45 @@ class _PigStackedSheetsState extends State<PigStackedSheets> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Heading2(widget.title1, color: black),
-                        AnimatedContainer(
-                          duration: _animationDuration,
-                          child: Transform.rotate(
-                            angle: _angle1,
-                            child: const PigArrow(turns: 1),
-                          ),
-                        )
+                        Heading2(title1, color: black),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            if (icon != null && userState.isAuthorized)
+                              {
+                                IconButton(
+                                  splashColor: transparent,
+                                  highlightColor: transparent,
+                                  icon: Icon(
+                                    icon,
+                                    color: grey,
+                                  ),
+                                  iconSize: rSHeight(25),
+                                  onPressed: iconTap,
+                                ),
+                              }.toSet().first,
+                            const HSpacer(
+                              sizeFactor: SizeFactor.half,
+                            ),
+                            AnimatedContainer(
+                              duration: _animationDuration,
+                              child: Transform.rotate(
+                                angle: angleOneState,
+                                child: const PigArrow(turns: 1),
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                     const VSpacer(sizeFactor: SizeFactor.half),
-                    widget.child1,
+                    child1,
                   ],
                 ),
               ),
             ),
             AnimatedPositioned(
-              top: top,
+              top: heightState,
               // bottom: 60,
               duration: _animationDuration,
               child: Container(
@@ -128,15 +154,15 @@ class _PigStackedSheetsState extends State<PigStackedSheets> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Heading2(widget.title2, color: black),
+                          Heading2(title2, color: black),
                           Transform.rotate(
-                            angle: _angle2,
+                            angle: angleTwoState,
                             child: const PigArrow(turns: 1),
                           ),
                         ],
                       ),
                       const VSpacer(sizeFactor: SizeFactor.half),
-                      widget.child2,
+                      child2,
                     ],
                   ),
                 ),

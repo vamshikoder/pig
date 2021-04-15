@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/book_model.dart';
+import 'package:pig/models/book/book.dart';
 
 class RecommendedNotifier extends StateNotifier<List<Book>> {
   RecommendedNotifier()
       : super([
-          Book(
+          const Book(
             bookName: '',
             bookCode: '',
           ),

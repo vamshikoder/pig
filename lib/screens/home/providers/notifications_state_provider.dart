@@ -1,13 +1,22 @@
 //~ This file provides all the state that is related to [Notifications]
 //& Made by PIG
-
+// ignore_for_file: use_setters_to_change_properties
+//
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/notification_model.dart' as n;
+import 'package:pig/models/notification/notification.dart' as n;
 
 //* global providers
 ///this provider gets the list of [notifications] that belongs to the [user]
 class NotificationsNotifier extends StateNotifier<List<n.Notification>> {
   NotificationsNotifier() : super([]);
+  void initNotifications() {
+    //TODO: on app start init the notifications
+  }
+  void addToNotifications(n.Notification val) {
+    //TODO: to get the notification from the server when there is new notification
+    state.add(val);
+    //TODO: in the background to add these to the app storage
+  }
 }
 
 final notificationStateProvider =
@@ -39,7 +48,6 @@ class NotificationOverviewNotifier extends StateNotifier<n.Notification> {
           description: "",
         ));
 
-  // ignore: use_setters_to_change_properties
   void selectNotification(n.Notification notification) {
     state = notification;
   }
@@ -64,8 +72,32 @@ final showPostNotificationStateProvider =
   return ShowPostNotificationNotifier();
 });
 
-//^ Authorized providers
+//^ Authorized Notification providers
 //! DONOT MODIFY THESE!
+
+class AuthNotificationsNotifier extends StateNotifier<List<n.Notification>> {
+  AuthNotificationsNotifier() : super([]);
+
+  void initAuthNotifications(List<n.Notification> initialList) {
+    // TODO: any other editing on init
+    state = initialList;
+  }
+
+  void addToAuthNotifications(n.Notification val) {
+    state.add(val);
+    //TODO: in the background to add these to the app storage
+    //TODO: also add this to the server
+  }
+
+  void subFromAuthNotifications(n.Notification val) =>
+      state.removeWhere((value) => value == val);
+}
+
+final authNotificationsStateProvider =
+    StateNotifierProvider<AuthNotificationsNotifier>((ref) {
+  return AuthNotificationsNotifier();
+});
+
 class ShowAuthNotificationsNotifier extends StateNotifier<bool> {
   ShowAuthNotificationsNotifier() : super(false);
   void showAuthNotifications() {

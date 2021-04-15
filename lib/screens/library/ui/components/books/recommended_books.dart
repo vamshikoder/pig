@@ -4,7 +4,7 @@ import 'package:pig/screens/library/ui/components/book_view/book_view.dart';
 
 import '../../../../../data/dummie_recommended_books.dart';
 
-import '../../../../../models/book_model.dart';
+import '../../../../../models/book/book.dart';
 
 import './extended_book_card.dart';
 

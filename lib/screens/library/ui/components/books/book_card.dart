@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/book_model.dart';
+import 'package:pig/models/book/book.dart';
 // import 'package:get/route_manager.dart';
 
 import '../../../../../config/config.dart';

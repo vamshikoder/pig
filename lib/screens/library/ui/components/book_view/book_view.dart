@@ -4,7 +4,7 @@ import 'package:get/route_manager.dart';
 
 import '../../../../../config/config.dart';
 
-import '../../../../../models/book_model.dart';
+import '../../../../../models/book/book.dart';
 
 import '../../../../../widgets/global_utility_widgets.dart';
 import './content_card.dart';

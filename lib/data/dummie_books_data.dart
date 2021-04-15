@@ -1,6 +1,6 @@
-import '../models/book_model.dart';
+import '../models/book/book.dart';
 
-final List<Book> books = [
+const List<Book> books = [
   Book(
     bookName:
         'Concepts Of Programming Languages Robert.W.Sebesta 10th edition, Pearson Education',

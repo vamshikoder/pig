@@ -1,10 +1,10 @@
-// import 'dart:developer';
-
+//~ These manage the state of the library module
+//& Made by PIG
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/dummie_books_data.dart';
-import '../../../models/book_model.dart';
+import '../../../models/book/book.dart';
 
 class SearchResultsNotifier extends StateNotifier<List<Book>> {
   SearchResultsNotifier() : super([]);
@@ -17,12 +17,6 @@ class SearchResultsNotifier extends StateNotifier<List<Book>> {
           (book) => book.bookName.toLowerCase().contains(value),
         )
         .toList();
-    // final List<String> temp = [];
-    // for (final Book item in state) {
-    //   temp.add(item.bookName);
-    // }
-    // log(temp.toString(), name: "book name");
-    // log("\n");
     return value;
   }
 }

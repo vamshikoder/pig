@@ -178,11 +178,11 @@
 	},
 	"create a watch for state provider": {
 		"prefix": "wpro",
-		"body": "final $1State = watch($1StateProvider.state);"
+		"body": "final $1State = watch($1StateProvider).state;"
 	},
 	"create a watch for state Notifier provider": {
 		"prefix": "wnpro",
-		"body": "final $1State = watch($1StateProvider).state;"
+		"body": "final $1State = watch($1StateProvider.state);"
 	},
 	"import material.dart": {
 		"prefix": "impm",

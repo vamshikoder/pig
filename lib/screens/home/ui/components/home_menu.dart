@@ -36,7 +36,7 @@ class HomeMenu extends ConsumerWidget {
           GestureDetector(
             onTap: () {
               /// This closes the [PigDrawer]
-              controller.close();
+              controller.close(context);
               Get.to(
                 () => Library(),
                 duration: animationDuration,
@@ -54,7 +54,7 @@ class HomeMenu extends ConsumerWidget {
           GestureDetector(
             onTap: () {
               /// This closes the [PigDrawer]
-              controller.close();
+              controller.close(context);
               Get.to(
                 () => Chats(),
                 duration: animationDuration,
@@ -72,7 +72,7 @@ class HomeMenu extends ConsumerWidget {
           GestureDetector(
             onTap: () {
               /// This closes the [PigDrawer]
-              controller.close();
+              controller.close(context);
               Get.to(
                 () => Settings(),
                 duration: animationDuration,
@@ -88,7 +88,7 @@ class HomeMenu extends ConsumerWidget {
           GestureDetector(
             onTap: () {
               /// This closes the [PigDrawer]
-              controller.close();
+              controller.close(context);
               Get.to(
                 () => About(),
                 duration: animationDuration,

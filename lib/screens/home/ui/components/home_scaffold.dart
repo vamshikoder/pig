@@ -18,6 +18,7 @@ import '../../../../screens/account/ui/account.dart';
 import '../../../../screens/chats/ui/chats.dart';
 
 import '../../../../widgets/global_utility_widgets.dart';
+import '../../../../widgets/pig_drawer.dart';
 import '../../../../widgets/pig_stacked_sheet.dart';
 
 import '../../providers/notifications_state_provider.dart';
@@ -31,7 +32,10 @@ import './pig_calendar.dart';
 import './pig_timetable.dart';
 
 class HomeScaffold extends ConsumerWidget {
+  final PigDrawerController controller;
+
   const HomeScaffold({
+    required this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -56,6 +60,9 @@ class HomeScaffold extends ConsumerWidget {
     /// according to [showAuthNotificationListState] it manages to show or do not show the [AuthNotificationList] or not
     final showAuthNotificationsState =
         watch(showAuthNotificationsStateProvider.state);
+
+    final scaffoldBlockState = watch(scaffoldBlockStateProvider.state);
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -133,14 +140,16 @@ class HomeScaffold extends ConsumerWidget {
                   top: rSHeight(210),
 
                   ///[StackedSheets] with calendar and timetable
-                  child: const PigStackedSheets(
+                  child: PigStackedSheets(
                     title1: 'calendar',
                     title2: 'timetable',
 
                     ///[PigCalendar] shows a custom Calendar
-                    child1: PigCalendar(),
-                    child2: PigTimeTable(),
+                    child1: const PigCalendar(),
+                    child2: const PigTimeTable(),
                     heightFactor: 0.55,
+                    icon: Icons.event_rounded,
+                    iconTap: () {},
                   ),
                 ),
               ],
@@ -166,8 +175,32 @@ class HomeScaffold extends ConsumerWidget {
         if (showAuthNotificationsState)
           const AuthNotifications()
         else
-          Container()
+          Container(),
+        if (scaffoldBlockState)
+          Empty(
+            controller: controller,
+          )
+        else
+          Container(),
       ],
+    );
+  }
+}
+
+class Empty extends StatelessWidget {
+  final PigDrawerController controller;
+
+  const Empty({Key? key, required this.controller}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onHorizontalDragStart: (details) {
+        controller.close(context);
+      },
+      child: const Scaffold(
+        backgroundColor: transparent,
+      ),
     );
   }
 }
