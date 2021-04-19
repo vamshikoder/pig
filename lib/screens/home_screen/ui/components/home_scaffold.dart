@@ -6,13 +6,14 @@
 
 import 'dart:ui';
 
+// import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/route_manager.dart';
 
 import '../../../../config/config.dart';
 
-import '../../../../providers/user_state_provider.dart';
+// import '../../../../providers/user_state_provider.dart';
 
 import '../../../../screens/account_screen/ui/account_screen.dart';
 import '../../../../screens/chats_screen/ui/chats_screen.dart';
@@ -46,7 +47,7 @@ class HomeScaffold extends ConsumerWidget {
     final showNotificationState = watch(showNotificationStateProvider.state);
 
     //! This defines the [user] details like isManager or not do not remove or changed.
-    final userState = watch(userStateProvider.state);
+    // final userState = watch(userStateProvider.state);
 
     ///[showPostNotificationState] if there is [PostNotificationview] is displayed or not.
     ///according to that it manages to show or do not show the [PostNotificationview] or not
@@ -69,31 +70,12 @@ class HomeScaffold extends ConsumerWidget {
         PigCustomScaffold(
           title: 'home',
           head: [
-            /// only if user is [Authorized] show this [add] icons and be able to add [post/notifications]
-            if (userState.isAuthorized)
-              IconButton(
-                splashColor: transparent,
-                highlightColor: transparent,
-                icon: const Icon(
-                  Icons.add_box_outlined,
-                  color: grey,
-                ),
-                onPressed: () {
-                  /// it allows the [Authorized] to open a [PostNotification]
-                  context
-                      .read(showPostNotificationStateProvider)
-                      .showPostNotification();
-                  // }
-                },
-              )
-            else
-              Container(),
             IconButton(
               splashColor: transparent,
               highlightColor: transparent,
               icon: const Icon(
                 Icons.chat_outlined,
-                color: grey,
+                color: primaryColor,
               ),
               onPressed: () {
                 Get.to(
@@ -103,7 +85,6 @@ class HomeScaffold extends ConsumerWidget {
                 );
               },
             ),
-
             Padding(
               padding: EdgeInsets.only(
                 right: hPadding(0.5),
@@ -159,6 +140,7 @@ class HomeScaffold extends ConsumerWidget {
 
         ///[if] any [NotificationCard] is tapped then it opens the [NotificationOverView]
         ///[else] it shows an empty [Container]
+
         if (showNotificationState)
           NotificationOverviewView(
             notification: notificationOverviewState,
@@ -198,8 +180,23 @@ class Empty extends StatelessWidget {
       onHorizontalDragStart: (details) {
         controller.close(context);
       },
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: transparent,
+        body: ClipRRect(
+          borderRadius: lightBorderRadius,
+          child: Container(
+            color: black.withOpacity(0.01),
+            height: screenHeight,
+            width: screenWidth,
+            child: BackdropFilter(
+              ///this blurs the [background] for a focused feeling
+              filter: ImageFilter.blur(
+                sigmaX: 5,
+                sigmaY: 5,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
