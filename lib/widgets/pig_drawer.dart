@@ -60,8 +60,7 @@ class _PigDrawerState extends State<PigDrawer> {
           ],
         ),
         child: ClipRRect(
-          borderRadius:
-              BorderRadius.only(topRight: Radius.circular(cornerRadius)),
+          borderRadius: BorderRadius.circular(cornerRadius),
           child: GestureDetector(
             onTap: () {
               if (widget.scrollable!) widget.controller.close(context);
