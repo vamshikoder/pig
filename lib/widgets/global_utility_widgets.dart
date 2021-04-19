@@ -54,7 +54,7 @@ class PigCube extends StatelessWidget {
 }
 
 class PigArrow extends StatelessWidget {
-  ///[PigArrow] is a [icon] configured so that it can
+  ///[PigArrow] is a [icons] configured so that it can
   ///be used everywhere while changing [turns] parameter that changes [angle]
   ///of the icon
 
@@ -132,7 +132,7 @@ class PigSheet extends riverpod.ConsumerWidget {
 
   ///[child] this where all the [Widgets] under the [PigSheet] should be written
   final Widget child;
-  final IconData? icon;
+  final List<Widget>? icons;
   final VoidCallback? iconTap;
 
   const PigSheet({
@@ -140,17 +140,17 @@ class PigSheet extends riverpod.ConsumerWidget {
     this.title,
     required this.child,
     required this.height,
-    this.icon,
-    this.iconTap,
+    this.icons,
+    @Deprecated("use icons to send multiple iconbuttons instead") this.iconTap,
   }) : super(key: key);
   @override
   Widget build(BuildContext context, riverpod.ScopedReader watch) {
     //! This defines the [user] details like isManager or not do not remove or changed.
     final userState = watch(userStateProvider.state);
-    final double _screenWidth = Get.width;
     final String _title = title ?? "";
+    final List<Widget> _icons = icons ?? [Container()];
     return Container(
-      width: _screenWidth,
+      width: screenWidth,
       height: height,
       decoration: const BoxDecoration(
         color: white,
@@ -166,19 +166,10 @@ class PigSheet extends riverpod.ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Heading2(_title, color: black),
-                if (icon != null)
-                  {
-                    IconButton(
-                      splashColor: transparent,
-                      highlightColor: transparent,
-                      icon: Icon(
-                        icon,
-                        color: grey,
-                      ),
-                      iconSize: rSHeight(25),
-                      onPressed: iconTap,
-                    ),
-                  }.toList().first,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: _icons,
+                )
               ],
             ),
             if (userState.isAuthorized)
