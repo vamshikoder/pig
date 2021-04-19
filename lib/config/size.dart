@@ -6,8 +6,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-final double _screenHeight = Get.height;
-final double _screenWidth = Get.width;
+final double screenHeight = Get.height;
+final double screenWidth = Get.width;
 const double _defaultPadding = 40.0;
 
 ///[PIXEL 4XL] size 411 / 820
@@ -22,22 +22,22 @@ const BorderRadius lightBorderRadius = BorderRadius.all(
 );
 // gets relative screen width so that app look the same every where
 double rSHeight(double height) {
-  final double screenHeight = _screenHeight;
-  return height * screenHeight / constScreenHeight;
+  final double sh = screenHeight;
+  return height * sh / constScreenHeight;
 }
 
 double rSWidth(double width) {
-  final double screenWidth = _screenWidth;
-  return width * screenWidth / constScreenWidth;
+  final double sw = screenWidth;
+  return width * sw / constScreenWidth;
 }
 
 // returns a double and gets relative padding
 double hPadding(double factor) {
-  return _defaultPadding * factor * _screenWidth / constScreenWidth;
+  return _defaultPadding * factor * screenWidth / constScreenWidth;
 }
 
 double vPadding(double factor) {
-  return _defaultPadding * factor * _screenHeight / constScreenHeight;
+  return _defaultPadding * factor * screenHeight / constScreenHeight;
 }
 
 class VSpacer extends StatelessWidget {
@@ -61,7 +61,7 @@ class VSpacer extends StatelessWidget {
         _factor = 1;
     }
     return SizedBox(
-      height: (_defaultPadding * _screenHeight / constScreenHeight) * _factor,
+      height: (_defaultPadding * screenHeight / constScreenHeight) * _factor,
     );
   }
 }
@@ -89,7 +89,7 @@ class HSpacer extends StatelessWidget {
     }
 
     return SizedBox(
-      width: (_defaultPadding * _screenWidth / constScreenWidth) * _factor,
+      width: (_defaultPadding * screenWidth / constScreenWidth) * _factor,
     );
   }
 }

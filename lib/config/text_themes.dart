@@ -17,10 +17,11 @@ class Heading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text.toUpperCase(),
+      textScaleFactor: screenWidth / constScreenWidth,
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: rSHeight(30),
+        fontSize: 30,
         fontWeight: FontWeight.w900,
         letterSpacing: 2,
       ),
@@ -43,10 +44,11 @@ class Heading1 extends StatelessWidget {
     return Text(
       text.toUpperCase(),
       overflow: TextOverflow.fade,
+      textScaleFactor: screenWidth / constScreenWidth,
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: rSHeight(23),
+        fontSize: 23,
         fontWeight: FontWeight.bold,
         letterSpacing: 2.0,
       ),
@@ -70,10 +72,11 @@ class Heading2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text.toUpperCase(),
+      textScaleFactor: screenWidth / constScreenWidth,
       style: TextStyle(
         color: color,
         fontFamily: 'Poppins',
-        fontSize: rSHeight(18),
+        fontSize: 18,
         fontWeight: FontWeight.w600,
         letterSpacing: letterSpacing,
       ),
@@ -101,10 +104,11 @@ class SubText extends StatelessWidget {
       text,
       overflow: TextOverflow.fade,
       maxLines: 2,
+      textScaleFactor: screenWidth / constScreenWidth,
       style: TextStyle(
         color: color,
         // fontFamily: 'Poppins',
-        fontSize: rSHeight(15),
+        fontSize: 15,
         fontWeight: bold! ? FontWeight.bold : FontWeight.w400,
         letterSpacing: letterSpacing,
       ),
@@ -129,10 +133,11 @@ class SubTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textScaleFactor: screenWidth / constScreenWidth,
       style: TextStyle(
         color: color,
         // fontFamily: 'Poppins',
-        fontSize: rSHeight(12),
+        fontSize: 12,
         fontWeight: bold! ? FontWeight.bold : FontWeight.w400,
         letterSpacing: letterSpacing,
       ),
