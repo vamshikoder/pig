@@ -9,7 +9,7 @@ final List<BorrowedBook> recentBooks = [
           'Principles, Techniques and Tools, Second Edition, Alfred V. Aho, Monica S. Lam, Ravi Sethi, Jeffry D. Ullman, Pearson',
       bookCode: 'somecode',
     ),
-    time: DateTime.now(),
+    startTime: DateTime.now(),
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
@@ -17,7 +17,7 @@ final List<BorrowedBook> recentBooks = [
       bookName: 'mechnaical',
       bookCode: 'ksf98',
     ),
-    time: DateTime.now(),
+    startTime: DateTime.now(),
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
@@ -25,7 +25,7 @@ final List<BorrowedBook> recentBooks = [
       bookName: 'elecritcal',
       bookCode: 'jk8sf',
     ),
-    time: DateTime.now(),
+    startTime: DateTime.now(),
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
@@ -33,7 +33,7 @@ final List<BorrowedBook> recentBooks = [
       bookName: 'mbbs',
       bookCode: '13sfs',
     ),
-    time: DateTime.now(),
+    startTime: DateTime.now(),
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
@@ -41,7 +41,7 @@ final List<BorrowedBook> recentBooks = [
       bookName: 'scientist',
       bookCode: 'fsd3sf',
     ),
-    time: DateTime.now(),
+    startTime: DateTime.now(),
   ),
   BorrowedBook(
     email: 'vamshikrishna.kar@gmail.com',
@@ -49,6 +49,6 @@ final List<BorrowedBook> recentBooks = [
       bookName: 'aminator',
       bookCode: '33sfs',
     ),
-    time: DateTime.now(),
+    startTime: DateTime.now(),
   ),
 ];
