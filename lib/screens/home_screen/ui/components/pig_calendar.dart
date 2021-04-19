@@ -18,11 +18,8 @@ class PigCalendar extends StatefulWidget {
 class _PigCalendarState extends State<PigCalendar> {
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-    final double _sHeight = _size.height;
-    // final double _sWidth = _size.width;
     return LimitedBox(
-      maxHeight: _sHeight * 0.40,
+      maxHeight: screenHeight * 0.40,
       child: SfCalendar(
         // headerHeight: 5.0,
         viewHeaderHeight: 20.0,

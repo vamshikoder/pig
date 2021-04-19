@@ -86,13 +86,13 @@ class AuthNotificationsNotifier extends StateNotifier<List<n.Notification>> {
     state = initialList;
   }
 
-  void addToAuthNotifications(n.Notification notification) {
+  void insToAuthNotifications(n.Notification notification) {
     state.add(notification);
 
     /// add [toServer] and [toLocal] functions.
   }
 
-  void subFromAuthNotifications(n.Notification notification) {
+  void delFromAuthNotifications(n.Notification notification) {
     state.removeWhere((value) => value == notification);
 
     /// delete [fromServer] and [fromLocal] functions.
@@ -114,4 +114,16 @@ class ShowAuthNotificationsNotifier extends StateNotifier<bool> {
 final showAuthNotificationsStateProvider =
     StateNotifierProvider<ShowAuthNotificationsNotifier>((ref) {
   return ShowAuthNotificationsNotifier();
+});
+
+class ShowNotificationScopeNotifier extends StateNotifier<bool> {
+  ShowNotificationScopeNotifier() : super(false);
+  void showNotificationScope() {
+    state = !state;
+  }
+}
+
+final showNotificationScopeStateProvider =
+    StateNotifierProvider<ShowNotificationScopeNotifier>((ref) {
+  return ShowNotificationScopeNotifier();
 });

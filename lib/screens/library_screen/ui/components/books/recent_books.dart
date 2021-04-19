@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:pig/config/config.dart';
 
 import '../../../../../data/dummie_recent_books_data.dart';
 
@@ -15,7 +16,7 @@ class RecentBooks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Get.height * 0.39,
+      height: screenHeight * 0.39,
       width: double.infinity,
       child: GridView(
         physics: const BouncingScrollPhysics(),
@@ -32,7 +33,7 @@ class RecentBooks extends StatelessWidget {
               );
             },
             book: val.book,
-            time: val.time,
+            time: val.startTime,
           );
         }).toList(),
       ),

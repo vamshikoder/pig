@@ -20,20 +20,16 @@ import '../../../providers/notifications_state_provider.dart';
 
 class NotificationOverviewView extends ConsumerWidget {
   final n.Notification notification;
-
   const NotificationOverviewView({
-    Key? key,
+    // required Key key,
     required this.notification,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final Size _size = MediaQuery.of(context).size;
-    final double _sHeight = _size.height;
-
     return Container(
       color: transparent,
-      height: _sHeight,
+      height: screenHeight,
       width: double.infinity,
       child: BackdropFilter(
         ///this blurs the [background] for a focused feeling
@@ -44,7 +40,7 @@ class NotificationOverviewView extends ConsumerWidget {
         child: Center(
           child: PigPaddingContainer(
             child: Container(
-              height: _sHeight * 0.7,
+              height: screenHeight * 0.7,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: white,
@@ -73,6 +69,7 @@ class NotificationOverviewView extends ConsumerWidget {
                           ),
                           onPressed: () {
                             ///this closes the [Notification Overview]
+
                             context
                                 .read(showNotificationStateProvider)
                                 .showNotification();

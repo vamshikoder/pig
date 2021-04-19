@@ -32,18 +32,46 @@ class Notifications extends ConsumerWidget {
     final showNotificationState = watch(showNotificationStateProvider.state);
     final showPostNotificationState =
         watch(showPostNotificationStateProvider.state);
+
     return Padding(
       padding: const EdgeInsets.only(top: 4.0),
       child: PigSheet(
         title: 'Notifications',
-        icon: userState.isAuthorized ? Icons.list_rounded : null,
-        iconTap: () {
-          context
-              .read(showAuthNotificationsStateProvider)
-              .showAuthNotifications();
-          //TODO show all the notifications that the authorized memeber has made.
-          log("authorized members notifications list.");
-        },
+        icons: userState.isAuthorized
+            ? [
+                IconButton(
+                  tooltip: "post notification.",
+                  splashColor: transparent,
+                  highlightColor: transparent,
+                  icon: const Icon(
+                    Icons.add,
+                    color: primaryColor,
+                  ),
+                  onPressed: () {
+                    /// it allows the [Authorized] to open a [PostNotification]
+                    context
+                        .read(showPostNotificationStateProvider)
+                        .showPostNotification();
+                    // }
+                  },
+                ),
+                IconButton(
+                    tooltip: "Notifications you posted",
+                    splashColor: transparent,
+                    highlightColor: transparent,
+                    icon: const Icon(
+                      Icons.list_rounded,
+                      color: primaryColor,
+                    ),
+                    onPressed: () {
+                      context
+                          .read(showAuthNotificationsStateProvider)
+                          .showAuthNotifications();
+                      //TODO show all the notifications that the authorized memeber has made.
+                      log("authorized members notifications list.");
+                    }),
+              ]
+            : null,
         height: rSHeight(250),
         child: SingleChildScrollView(
           clipBehavior: Clip.none,
@@ -62,13 +90,13 @@ class Notifications extends ConsumerWidget {
                     if (!showNotificationState & !showPostNotificationState) {
                       ///this sets the showNotification to [true] so that it opens the [NotificationOverview]
                       context
+                          .read(notificationOverviewStateProvider)
+                          .selectNotification(val);
+                      context
                           .read(showNotificationStateProvider)
                           .showNotification();
 
                       ///this sends the values of the card clicked to the [NotificationOverview]
-                      context
-                          .read(notificationOverviewStateProvider)
-                          .selectNotification(val);
                       // context.read(notificationOverviewAnimationStateProvider)
                     }
                   },
