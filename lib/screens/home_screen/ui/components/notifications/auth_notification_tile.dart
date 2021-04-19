@@ -49,7 +49,7 @@ class AuthNotificationTile extends StatelessWidget {
               case DismissDirection.startToEnd:
                 context
                     .read(authNotificationsStateProvider)
-                    .subFromAuthNotifications(notification);
+                    .delFromAuthNotifications(notification);
                 log("deleted the notification");
                 break;
             }
