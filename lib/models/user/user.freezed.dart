@@ -24,9 +24,7 @@ class _$UserTearOff {
       {required String email,
       required String name,
       required bool isAuthorized,
-      required String scope,
-      int? year,
-      int? section,
+      required Scope scope,
       String? hallticketNumber,
       String? designation}) {
     return _User(
@@ -34,8 +32,6 @@ class _$UserTearOff {
       name: name,
       isAuthorized: isAuthorized,
       scope: scope,
-      year: year,
-      section: section,
       hallticketNumber: hallticketNumber,
       designation: designation,
     );
@@ -54,9 +50,10 @@ mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   bool get isAuthorized => throw _privateConstructorUsedError;
-  String get scope => throw _privateConstructorUsedError;
-  int? get year => throw _privateConstructorUsedError;
-  int? get section => throw _privateConstructorUsedError;
+  Scope get scope =>
+      throw _privateConstructorUsedError; // required String scope,
+// int? year,
+// int? section,
   String? get hallticketNumber => throw _privateConstructorUsedError;
   String? get designation => throw _privateConstructorUsedError;
 
@@ -73,11 +70,11 @@ abstract class $UserCopyWith<$Res> {
       {String email,
       String name,
       bool isAuthorized,
-      String scope,
-      int? year,
-      int? section,
+      Scope scope,
       String? hallticketNumber,
       String? designation});
+
+  $ScopeCopyWith<$Res> get scope;
 }
 
 /// @nodoc
@@ -94,8 +91,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? name = freezed,
     Object? isAuthorized = freezed,
     Object? scope = freezed,
-    Object? year = freezed,
-    Object? section = freezed,
     Object? hallticketNumber = freezed,
     Object? designation = freezed,
   }) {
@@ -115,15 +110,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       scope: scope == freezed
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
-              as String,
-      year: year == freezed
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int?,
-      section: section == freezed
-          ? _value.section
-          : section // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Scope,
       hallticketNumber: hallticketNumber == freezed
           ? _value.hallticketNumber
           : hallticketNumber // ignore: cast_nullable_to_non_nullable
@@ -133,6 +120,13 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           : designation // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
+  }
+
+  @override
+  $ScopeCopyWith<$Res> get scope {
+    return $ScopeCopyWith<$Res>(_value.scope, (value) {
+      return _then(_value.copyWith(scope: value));
+    });
   }
 }
 
@@ -145,11 +139,12 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String email,
       String name,
       bool isAuthorized,
-      String scope,
-      int? year,
-      int? section,
+      Scope scope,
       String? hallticketNumber,
       String? designation});
+
+  @override
+  $ScopeCopyWith<$Res> get scope;
 }
 
 /// @nodoc
@@ -167,8 +162,6 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? name = freezed,
     Object? isAuthorized = freezed,
     Object? scope = freezed,
-    Object? year = freezed,
-    Object? section = freezed,
     Object? hallticketNumber = freezed,
     Object? designation = freezed,
   }) {
@@ -188,15 +181,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       scope: scope == freezed
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
-              as String,
-      year: year == freezed
-          ? _value.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int?,
-      section: section == freezed
-          ? _value.section
-          : section // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Scope,
       hallticketNumber: hallticketNumber == freezed
           ? _value.hallticketNumber
           : hallticketNumber // ignore: cast_nullable_to_non_nullable
@@ -218,8 +203,6 @@ class _$_User implements _User {
       required this.name,
       required this.isAuthorized,
       required this.scope,
-      this.year,
-      this.section,
       this.hallticketNumber,
       this.designation});
 
@@ -233,19 +216,17 @@ class _$_User implements _User {
   @override
   final bool isAuthorized;
   @override
-  final String scope;
-  @override
-  final int? year;
-  @override
-  final int? section;
-  @override
+  final Scope scope;
+  @override // required String scope,
+// int? year,
+// int? section,
   final String? hallticketNumber;
   @override
   final String? designation;
 
   @override
   String toString() {
-    return 'User(email: $email, name: $name, isAuthorized: $isAuthorized, scope: $scope, year: $year, section: $section, hallticketNumber: $hallticketNumber, designation: $designation)';
+    return 'User(email: $email, name: $name, isAuthorized: $isAuthorized, scope: $scope, hallticketNumber: $hallticketNumber, designation: $designation)';
   }
 
   @override
@@ -261,11 +242,6 @@ class _$_User implements _User {
                     .equals(other.isAuthorized, isAuthorized)) &&
             (identical(other.scope, scope) ||
                 const DeepCollectionEquality().equals(other.scope, scope)) &&
-            (identical(other.year, year) ||
-                const DeepCollectionEquality().equals(other.year, year)) &&
-            (identical(other.section, section) ||
-                const DeepCollectionEquality()
-                    .equals(other.section, section)) &&
             (identical(other.hallticketNumber, hallticketNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.hallticketNumber, hallticketNumber)) &&
@@ -281,8 +257,6 @@ class _$_User implements _User {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(isAuthorized) ^
       const DeepCollectionEquality().hash(scope) ^
-      const DeepCollectionEquality().hash(year) ^
-      const DeepCollectionEquality().hash(section) ^
       const DeepCollectionEquality().hash(hallticketNumber) ^
       const DeepCollectionEquality().hash(designation);
 
@@ -302,9 +276,7 @@ abstract class _User implements User {
       {required String email,
       required String name,
       required bool isAuthorized,
-      required String scope,
-      int? year,
-      int? section,
+      required Scope scope,
       String? hallticketNumber,
       String? designation}) = _$_User;
 
@@ -317,12 +289,10 @@ abstract class _User implements User {
   @override
   bool get isAuthorized => throw _privateConstructorUsedError;
   @override
-  String get scope => throw _privateConstructorUsedError;
-  @override
-  int? get year => throw _privateConstructorUsedError;
-  @override
-  int? get section => throw _privateConstructorUsedError;
-  @override
+  Scope get scope => throw _privateConstructorUsedError;
+  @override // required String scope,
+// int? year,
+// int? section,
   String? get hallticketNumber => throw _privateConstructorUsedError;
   @override
   String? get designation => throw _privateConstructorUsedError;

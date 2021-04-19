@@ -1,11 +1,11 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
+//ignore_for_file:non_constant_identifier_names
 part of 'event.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-// ignore: non_constant_identifier_names
+
 _$_Event _$_$_EventFromJson(Map<String, dynamic> json) {
   return _$_Event(
     eventName: json['eventName'] as String,
@@ -15,7 +15,6 @@ _$_Event _$_$_EventFromJson(Map<String, dynamic> json) {
   );
 }
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$_$_EventToJson(_$_Event instance) => <String, dynamic>{
       'eventName': instance.eventName,
       'host': instance.host,

@@ -1,12 +1,11 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
+//ignore_for_file:non_constant_identifier_names
 part of 'notification.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_Notification _$_$_NotificationFromJson(Map<String, dynamic> json) {
   return _$_Notification(
     title: json['title'] as String,
@@ -17,7 +16,6 @@ _$_Notification _$_$_NotificationFromJson(Map<String, dynamic> json) {
   );
 }
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$_$_NotificationToJson(_$_Notification instance) =>
     <String, dynamic>{
       'title': instance.title,

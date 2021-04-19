@@ -21,11 +21,13 @@ class _$BorrowedBookTearOff {
   const _$BorrowedBookTearOff();
 
   _BorrowedBook call(
-      {required String email, required Book book, required DateTime time}) {
+      {required String email,
+      required Book book,
+      required DateTime startTime}) {
     return _BorrowedBook(
       email: email,
       book: book,
-      time: time,
+      startTime: startTime,
     );
   }
 
@@ -41,7 +43,7 @@ const $BorrowedBook = _$BorrowedBookTearOff();
 mixin _$BorrowedBook {
   String get email => throw _privateConstructorUsedError;
   Book get book => throw _privateConstructorUsedError;
-  DateTime get time => throw _privateConstructorUsedError;
+  DateTime get startTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +56,7 @@ abstract class $BorrowedBookCopyWith<$Res> {
   factory $BorrowedBookCopyWith(
           BorrowedBook value, $Res Function(BorrowedBook) then) =
       _$BorrowedBookCopyWithImpl<$Res>;
-  $Res call({String email, Book book, DateTime time});
+  $Res call({String email, Book book, DateTime startTime});
 
   $BookCopyWith<$Res> get book;
 }
@@ -71,7 +73,7 @@ class _$BorrowedBookCopyWithImpl<$Res> implements $BorrowedBookCopyWith<$Res> {
   $Res call({
     Object? email = freezed,
     Object? book = freezed,
-    Object? time = freezed,
+    Object? startTime = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
@@ -82,9 +84,9 @@ class _$BorrowedBookCopyWithImpl<$Res> implements $BorrowedBookCopyWith<$Res> {
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
               as Book,
-      time: time == freezed
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      startTime: startTime == freezed
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -104,7 +106,7 @@ abstract class _$BorrowedBookCopyWith<$Res>
           _BorrowedBook value, $Res Function(_BorrowedBook) then) =
       __$BorrowedBookCopyWithImpl<$Res>;
   @override
-  $Res call({String email, Book book, DateTime time});
+  $Res call({String email, Book book, DateTime startTime});
 
   @override
   $BookCopyWith<$Res> get book;
@@ -124,7 +126,7 @@ class __$BorrowedBookCopyWithImpl<$Res> extends _$BorrowedBookCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? book = freezed,
-    Object? time = freezed,
+    Object? startTime = freezed,
   }) {
     return _then(_BorrowedBook(
       email: email == freezed
@@ -135,9 +137,9 @@ class __$BorrowedBookCopyWithImpl<$Res> extends _$BorrowedBookCopyWithImpl<$Res>
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
               as Book,
-      time: time == freezed
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      startTime: startTime == freezed
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -148,7 +150,7 @@ class __$BorrowedBookCopyWithImpl<$Res> extends _$BorrowedBookCopyWithImpl<$Res>
 /// @nodoc
 class _$_BorrowedBook implements _BorrowedBook {
   const _$_BorrowedBook(
-      {required this.email, required this.book, required this.time});
+      {required this.email, required this.book, required this.startTime});
 
   factory _$_BorrowedBook.fromJson(Map<String, dynamic> json) =>
       _$_$_BorrowedBookFromJson(json);
@@ -158,11 +160,11 @@ class _$_BorrowedBook implements _BorrowedBook {
   @override
   final Book book;
   @override
-  final DateTime time;
+  final DateTime startTime;
 
   @override
   String toString() {
-    return 'BorrowedBook(email: $email, book: $book, time: $time)';
+    return 'BorrowedBook(email: $email, book: $book, startTime: $startTime)';
   }
 
   @override
@@ -173,8 +175,9 @@ class _$_BorrowedBook implements _BorrowedBook {
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.book, book) ||
                 const DeepCollectionEquality().equals(other.book, book)) &&
-            (identical(other.time, time) ||
-                const DeepCollectionEquality().equals(other.time, time)));
+            (identical(other.startTime, startTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.startTime, startTime)));
   }
 
   @override
@@ -182,7 +185,7 @@ class _$_BorrowedBook implements _BorrowedBook {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(book) ^
-      const DeepCollectionEquality().hash(time);
+      const DeepCollectionEquality().hash(startTime);
 
   @JsonKey(ignore: true)
   @override
@@ -199,7 +202,7 @@ abstract class _BorrowedBook implements BorrowedBook {
   const factory _BorrowedBook(
       {required String email,
       required Book book,
-      required DateTime time}) = _$_BorrowedBook;
+      required DateTime startTime}) = _$_BorrowedBook;
 
   factory _BorrowedBook.fromJson(Map<String, dynamic> json) =
       _$_BorrowedBook.fromJson;
@@ -209,7 +212,7 @@ abstract class _BorrowedBook implements BorrowedBook {
   @override
   Book get book => throw _privateConstructorUsedError;
   @override
-  DateTime get time => throw _privateConstructorUsedError;
+  DateTime get startTime => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BorrowedBookCopyWith<_BorrowedBook> get copyWith =>

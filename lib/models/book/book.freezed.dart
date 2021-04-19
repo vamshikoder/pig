@@ -23,15 +23,13 @@ class _$BookTearOff {
   _Book call(
       {required String bookName,
       required String bookCode,
-      int? remainingCopies,
-      List<String>? contents,
-      bool? ownIt}) {
+      int? remainingCopies = 0,
+      List<String>? contents = const []}) {
     return _Book(
       bookName: bookName,
       bookCode: bookCode,
       remainingCopies: remainingCopies,
       contents: contents,
-      ownIt: ownIt,
     );
   }
 
@@ -49,7 +47,6 @@ mixin _$Book {
   String get bookCode => throw _privateConstructorUsedError;
   int? get remainingCopies => throw _privateConstructorUsedError;
   List<String>? get contents => throw _privateConstructorUsedError;
-  bool? get ownIt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,8 +61,7 @@ abstract class $BookCopyWith<$Res> {
       {String bookName,
       String bookCode,
       int? remainingCopies,
-      List<String>? contents,
-      bool? ownIt});
+      List<String>? contents});
 }
 
 /// @nodoc
@@ -82,7 +78,6 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
     Object? bookCode = freezed,
     Object? remainingCopies = freezed,
     Object? contents = freezed,
-    Object? ownIt = freezed,
   }) {
     return _then(_value.copyWith(
       bookName: bookName == freezed
@@ -101,10 +96,6 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
           ? _value.contents
           : contents // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      ownIt: ownIt == freezed
-          ? _value.ownIt
-          : ownIt // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
   }
 }
@@ -118,8 +109,7 @@ abstract class _$BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       {String bookName,
       String bookCode,
       int? remainingCopies,
-      List<String>? contents,
-      bool? ownIt});
+      List<String>? contents});
 }
 
 /// @nodoc
@@ -137,7 +127,6 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
     Object? bookCode = freezed,
     Object? remainingCopies = freezed,
     Object? contents = freezed,
-    Object? ownIt = freezed,
   }) {
     return _then(_Book(
       bookName: bookName == freezed
@@ -156,10 +145,6 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
           ? _value.contents
           : contents // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      ownIt: ownIt == freezed
-          ? _value.ownIt
-          : ownIt // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
   }
 }
@@ -171,9 +156,12 @@ class _$_Book implements _Book {
   const _$_Book(
       {required this.bookName,
       required this.bookCode,
-      this.remainingCopies,
-      this.contents,
-      this.ownIt});
+      this.remainingCopies = 0,
+      this.contents = const []})
+      : assert(
+            (bookName != " ") & (bookName != ""), 'bookName cannot be  empty'),
+        assert(
+            (bookCode != " ") & (bookCode != ""), 'bookCode cannot be empty');
 
   factory _$_Book.fromJson(Map<String, dynamic> json) =>
       _$_$_BookFromJson(json);
@@ -182,16 +170,16 @@ class _$_Book implements _Book {
   final String bookName;
   @override
   final String bookCode;
+  @JsonKey(defaultValue: 0)
   @override
   final int? remainingCopies;
+  @JsonKey(defaultValue: const [])
   @override
   final List<String>? contents;
-  @override
-  final bool? ownIt;
 
   @override
   String toString() {
-    return 'Book(bookName: $bookName, bookCode: $bookCode, remainingCopies: $remainingCopies, contents: $contents, ownIt: $ownIt)';
+    return 'Book(bookName: $bookName, bookCode: $bookCode, remainingCopies: $remainingCopies, contents: $contents)';
   }
 
   @override
@@ -209,9 +197,7 @@ class _$_Book implements _Book {
                     .equals(other.remainingCopies, remainingCopies)) &&
             (identical(other.contents, contents) ||
                 const DeepCollectionEquality()
-                    .equals(other.contents, contents)) &&
-            (identical(other.ownIt, ownIt) ||
-                const DeepCollectionEquality().equals(other.ownIt, ownIt)));
+                    .equals(other.contents, contents)));
   }
 
   @override
@@ -220,8 +206,7 @@ class _$_Book implements _Book {
       const DeepCollectionEquality().hash(bookName) ^
       const DeepCollectionEquality().hash(bookCode) ^
       const DeepCollectionEquality().hash(remainingCopies) ^
-      const DeepCollectionEquality().hash(contents) ^
-      const DeepCollectionEquality().hash(ownIt);
+      const DeepCollectionEquality().hash(contents);
 
   @JsonKey(ignore: true)
   @override
@@ -239,8 +224,7 @@ abstract class _Book implements Book {
       {required String bookName,
       required String bookCode,
       int? remainingCopies,
-      List<String>? contents,
-      bool? ownIt}) = _$_Book;
+      List<String>? contents}) = _$_Book;
 
   factory _Book.fromJson(Map<String, dynamic> json) = _$_Book.fromJson;
 
@@ -252,8 +236,6 @@ abstract class _Book implements Book {
   int? get remainingCopies => throw _privateConstructorUsedError;
   @override
   List<String>? get contents => throw _privateConstructorUsedError;
-  @override
-  bool? get ownIt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BookCopyWith<_Book> get copyWith => throw _privateConstructorUsedError;
