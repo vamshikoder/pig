@@ -2,6 +2,7 @@
 //& Made by PIG
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pig/models/scope/scope.dart';
 
 import '../models/user/user.dart';
 
@@ -11,7 +12,7 @@ class UserNotifier extends StateNotifier<User> {
           email: "",
           name: "",
           isAuthorized: true,
-          scope: 'CSE',
+          scope: Scope(branch: "CSE"),
         ));
 
   void setUser() {
@@ -22,7 +23,7 @@ class UserNotifier extends StateNotifier<User> {
       email: "",
       name: "",
       isAuthorized: true,
-      scope: 'CSE',
+      scope: Scope(branch: "CSE"),
     );
   }
 }
