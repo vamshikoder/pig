@@ -1,3 +1,6 @@
+//~ This file provides all the state that is related to [Notifications]
+//& Made by PIG
+
 import 'package:flutter/material.dart';
 
 import '../config/config.dart';
