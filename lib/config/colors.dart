@@ -10,20 +10,41 @@ const Color black = Colors.black;
 const Color transparent = Colors.transparent;
 const grey = Color.fromRGBO(126, 132, 163, 1);
 
-const List<BoxShadow> boxShadow = [
-  BoxShadow(
-    offset: Offset(0, 5),
-    color: Colors.black12,
-    blurRadius: 25,
-    spreadRadius: 2,
-  ),
-];
+// const List<BoxShadow> boxShadow = [
+//   BoxShadow(
+//     offset: Offset(0, 5),
+//     color: Colors.black12,
+//     blurRadius: 25,
+//     spreadRadius: 2,
+//   ),
+// ];
+List<BoxShadow> boxShadow({Color color = Colors.black12}) {
+  return [
+    BoxShadow(
+      offset: const Offset(0, 5),
+      color: color,
+      blurRadius: 25,
+      spreadRadius: 2,
+    )
+  ];
+}
 
-const List<BoxShadow> lightBoxShadow = [
-  BoxShadow(
-    offset: Offset(0, 3),
-    color: Colors.black12,
-    blurRadius: 10,
-    spreadRadius: 0.5,
-  ),
-];
+// const List<BoxShadow> lightBoxShadow = [
+//   BoxShadow(
+//     offset: Offset(0, 3),
+//     color: Colors.black12,
+//     blurRadius: 10,
+//     spreadRadius: 0.5,
+//   ),
+// ];
+
+List<BoxShadow> lightBoxShadow({Color color = Colors.black12}) {
+  return [
+    BoxShadow(
+      offset: const Offset(0, 3),
+      color: color,
+      blurRadius: 10,
+      spreadRadius: 0.5,
+    ),
+  ];
+}
