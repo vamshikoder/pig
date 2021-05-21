@@ -20,6 +20,7 @@ class PigExpansionTile extends StatefulWidget {
     this.expandedAlignment,
     this.childrenPadding,
     this.collapsedBackgroundColor,
+    this.iconChangeColor,
   })  : assert(
           expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
           'CrossAxisAlignment.baseline is not supported since the expanded children '
@@ -52,6 +53,8 @@ class PigExpansionTile extends StatefulWidget {
   final CrossAxisAlignment? expandedCrossAxisAlignment;
 
   final EdgeInsetsGeometry? childrenPadding;
+
+  final Color? iconChangeColor;
 
   @override
   _PigExpansionTileState createState() => _PigExpansionTileState();
@@ -159,14 +162,15 @@ class _PigExpansionTileState extends State<PigExpansionTile>
 
   @override
   void didChangeDependencies() {
+    final Color _iconChangeColor = widget.iconChangeColor ?? primaryColor;
     final ThemeData theme = Theme.of(context);
     _borderColorTween.end = theme.dividerColor;
     _headerColorTween
       ..begin = theme.textTheme.subtitle1!.color
-      ..end = primaryColor;
+      ..end = _iconChangeColor;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor
-      ..end = primaryColor;
+      ..end = _iconChangeColor;
     _backgroundColorTween
       ..begin = widget.collapsedBackgroundColor
       ..end = widget.backgroundColor;

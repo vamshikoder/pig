@@ -36,9 +36,9 @@ class PigSearchBar extends StatelessWidget {
             child: Container(
               height: rSHeight(50),
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: lightBoxShadow,
+                boxShadow: lightBoxShadow(),
                 borderRadius: deepBorderRadius,
               ),
               child: Center(

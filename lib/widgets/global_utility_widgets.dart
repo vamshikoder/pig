@@ -45,7 +45,7 @@ class PigCube extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: lightBorderRadius,
-          boxShadow: lightBoxShadow,
+          boxShadow: lightBoxShadow(color: color),
         ),
         child: child,
       ),
@@ -60,16 +60,27 @@ class PigArrow extends StatelessWidget {
 
   ///[turns] is used to change the angle takes [double]
   final double turns;
-
-  const PigArrow({Key? key, required this.turns}) : super(key: key);
+  final Color? color;
+  final VoidCallback? onTap;
+  const PigArrow({
+    Key? key,
+    required this.turns,
+    this.color,
+    this.onTap,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return RotatedBox(
-      quarterTurns: turns.toInt(),
-      child: const Icon(
-        Icons.arrow_back_ios_rounded,
-        color: primaryColor,
-        size: 15,
+    final Color _color = color ?? primaryColor;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: RotatedBox(
+        quarterTurns: turns.toInt(),
+        child: Icon(
+          Icons.arrow_back_ios_rounded,
+          color: _color,
+          size: 15,
+        ),
       ),
     );
   }
@@ -104,6 +115,10 @@ class PigPaddingContainer extends StatelessWidget {
       case SizeFactor.quater:
         _factor = 0.25;
         break;
+      case SizeFactor.min:
+        _factor = 0.12;
+        break;
+
       case SizeFactor.none:
         _factor = 0.0;
         break;
@@ -134,13 +149,16 @@ class PigSheet extends riverpod.ConsumerWidget {
   final Widget child;
   final List<Widget>? icons;
   final VoidCallback? iconTap;
-
+  final Color? color;
+  final List<BoxShadow>? boxShadow;
   const PigSheet({
     Key? key,
     this.title,
     required this.child,
     required this.height,
     this.icons,
+    this.color,
+    this.boxShadow,
     @Deprecated("use icons to send multiple iconbuttons instead") this.iconTap,
   }) : super(key: key);
   @override
@@ -149,11 +167,12 @@ class PigSheet extends riverpod.ConsumerWidget {
     final userState = watch(userStateProvider.state);
     final String _title = title ?? "";
     final List<Widget> _icons = icons ?? [Container()];
+    final Color _color = color ?? white;
     return Container(
       width: screenWidth,
       height: height,
-      decoration: const BoxDecoration(
-        color: white,
+      decoration: BoxDecoration(
+        color: _color,
         borderRadius: lightBorderRadius,
         boxShadow: boxShadow,
       ),
