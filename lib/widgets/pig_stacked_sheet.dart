@@ -84,10 +84,10 @@ class PigStackedSheets extends ConsumerWidget {
 
               ///[25.0] is to overflow the [sheet1] into the below [sheet2]
               height: _screenHeight * heightFactor + 25.0,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: white,
                 borderRadius: lightBorderRadius,
-                boxShadow: boxShadow,
+                boxShadow: boxShadow(),
               ),
               child: PigPaddingContainer(
                 child: Column(
@@ -141,10 +141,10 @@ class PigStackedSheets extends ConsumerWidget {
               child: Container(
                 width: _screenWidth,
                 height: _screenHeight,
-                decoration: const BoxDecoration(
-                  color: white,
+                decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: lightBorderRadius,
-                  boxShadow: boxShadow,
+                  boxShadow: boxShadow(),
                 ),
                 child: PigPaddingContainer(
                   child: Column(
