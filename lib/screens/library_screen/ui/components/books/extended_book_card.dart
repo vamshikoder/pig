@@ -55,7 +55,7 @@ class ExtendedBookCard extends ConsumerWidget {
                 ),
                 if (time != null)
                   SubText(
-                    "${time!.day.toString()} ${months[time!.month - 1]} ${time!.year}",
+                    formattedDate(time),
                     color: grey,
                     bold: true,
                   )

@@ -25,7 +25,6 @@ class SearchResults extends ConsumerWidget {
     final recentSearchState = watch(recentSearchStateProvider).state;
     final searchResultsState = watch(searchResultsStateProvider.state);
     return PigSheet(
-      title: 'search results',
       height: rSHeight(300),
       child: Column(
         children: [

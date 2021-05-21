@@ -22,9 +22,9 @@ class ContentTile extends StatelessWidget {
         vertical: vPadding(0.12),
       ),
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: white,
-          boxShadow: lightBoxShadow,
+          boxShadow: lightBoxShadow(),
           borderRadius: lightBorderRadius,
         ),
         child: PigExpansionTile(

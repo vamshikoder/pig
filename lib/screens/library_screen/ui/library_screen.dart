@@ -23,7 +23,10 @@ class LibraryScreen extends ConsumerWidget {
         body: Expanded(
           child: Stack(
             children: [
-              const SearchResults(),
+              const Positioned(
+                top: -10,
+                child: SearchResults(),
+              ),
               // Spacer(),
               Positioned(
                 top: rSHeight(280),
