@@ -8,12 +8,15 @@ import '../models/user/user.dart';
 
 class UserNotifier extends StateNotifier<User> {
   UserNotifier()
-      : super(const User(
-          email: "",
-          name: "",
-          isAuthorized: true,
-          scope: Scope(branch: "CSE"),
-        ));
+      : super(
+          const User(
+            email: "vamshikrishna.kar@gmail.com",
+            name: "vamshi krishna",
+            isAuthorized: true,
+            scope: Scope(branch: "CSE"),
+            designation: "HOD",
+          ),
+        );
 
   void setUser() {
     ///[function] which gets the user details from app storage.
