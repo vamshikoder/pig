@@ -23,11 +23,13 @@ class _$EventTearOff {
   _Event call(
       {required String eventName,
       required String host,
+      String? descripton,
       required DateTime from,
       DateTime? to}) {
     return _Event(
       eventName: eventName,
       host: host,
+      descripton: descripton,
       from: from,
       to: to,
     );
@@ -45,6 +47,7 @@ const $Event = _$EventTearOff();
 mixin _$Event {
   String get eventName => throw _privateConstructorUsedError;
   String get host => throw _privateConstructorUsedError;
+  String? get descripton => throw _privateConstructorUsedError;
   DateTime get from => throw _privateConstructorUsedError;
   DateTime? get to => throw _privateConstructorUsedError;
 
@@ -57,7 +60,12 @@ mixin _$Event {
 abstract class $EventCopyWith<$Res> {
   factory $EventCopyWith(Event value, $Res Function(Event) then) =
       _$EventCopyWithImpl<$Res>;
-  $Res call({String eventName, String host, DateTime from, DateTime? to});
+  $Res call(
+      {String eventName,
+      String host,
+      String? descripton,
+      DateTime from,
+      DateTime? to});
 }
 
 /// @nodoc
@@ -72,6 +80,7 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
   $Res call({
     Object? eventName = freezed,
     Object? host = freezed,
+    Object? descripton = freezed,
     Object? from = freezed,
     Object? to = freezed,
   }) {
@@ -84,6 +93,10 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
           ? _value.host
           : host // ignore: cast_nullable_to_non_nullable
               as String,
+      descripton: descripton == freezed
+          ? _value.descripton
+          : descripton // ignore: cast_nullable_to_non_nullable
+              as String?,
       from: from == freezed
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -101,7 +114,12 @@ abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   factory _$EventCopyWith(_Event value, $Res Function(_Event) then) =
       __$EventCopyWithImpl<$Res>;
   @override
-  $Res call({String eventName, String host, DateTime from, DateTime? to});
+  $Res call(
+      {String eventName,
+      String host,
+      String? descripton,
+      DateTime from,
+      DateTime? to});
 }
 
 /// @nodoc
@@ -117,6 +135,7 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
   $Res call({
     Object? eventName = freezed,
     Object? host = freezed,
+    Object? descripton = freezed,
     Object? from = freezed,
     Object? to = freezed,
   }) {
@@ -129,6 +148,10 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
           ? _value.host
           : host // ignore: cast_nullable_to_non_nullable
               as String,
+      descripton: descripton == freezed
+          ? _value.descripton
+          : descripton // ignore: cast_nullable_to_non_nullable
+              as String?,
       from: from == freezed
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -148,6 +171,7 @@ class _$_Event implements _Event {
   const _$_Event(
       {required this.eventName,
       required this.host,
+      this.descripton,
       required this.from,
       this.to});
 
@@ -159,13 +183,15 @@ class _$_Event implements _Event {
   @override
   final String host;
   @override
+  final String? descripton;
+  @override
   final DateTime from;
   @override
   final DateTime? to;
 
   @override
   String toString() {
-    return 'Event(eventName: $eventName, host: $host, from: $from, to: $to)';
+    return 'Event(eventName: $eventName, host: $host, descripton: $descripton, from: $from, to: $to)';
   }
 
   @override
@@ -177,6 +203,9 @@ class _$_Event implements _Event {
                     .equals(other.eventName, eventName)) &&
             (identical(other.host, host) ||
                 const DeepCollectionEquality().equals(other.host, host)) &&
+            (identical(other.descripton, descripton) ||
+                const DeepCollectionEquality()
+                    .equals(other.descripton, descripton)) &&
             (identical(other.from, from) ||
                 const DeepCollectionEquality().equals(other.from, from)) &&
             (identical(other.to, to) ||
@@ -188,6 +217,7 @@ class _$_Event implements _Event {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(eventName) ^
       const DeepCollectionEquality().hash(host) ^
+      const DeepCollectionEquality().hash(descripton) ^
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(to);
 
@@ -206,6 +236,7 @@ abstract class _Event implements Event {
   const factory _Event(
       {required String eventName,
       required String host,
+      String? descripton,
       required DateTime from,
       DateTime? to}) = _$_Event;
 
@@ -215,6 +246,8 @@ abstract class _Event implements Event {
   String get eventName => throw _privateConstructorUsedError;
   @override
   String get host => throw _privateConstructorUsedError;
+  @override
+  String? get descripton => throw _privateConstructorUsedError;
   @override
   DateTime get from => throw _privateConstructorUsedError;
   @override

@@ -24,6 +24,7 @@ class Event with _$Event {
   const factory Event({
     required String eventName,
     required String host,
+    String? descripton,
     required DateTime from,
     DateTime? to,
   }) = _Event;

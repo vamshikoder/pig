@@ -1,5 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-//ignore_for_file:non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
+
 part of 'notification.dart';
 
 // **************************************************************************
