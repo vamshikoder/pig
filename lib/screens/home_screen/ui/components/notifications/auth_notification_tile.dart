@@ -30,9 +30,9 @@ class AuthNotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: white,
-        boxShadow: lightBoxShadow,
+        boxShadow: lightBoxShadow(),
         borderRadius: lightBorderRadius,
       ),
       child: ClipRRect(
@@ -101,8 +101,7 @@ class AuthNotificationTile extends StatelessWidget {
                   notification.title,
                   letterSpacing: 1.0,
                 ),
-                subtitle: SubTitle(
-                    "${notification.time.day.toString()} ${months[notification.time.month - 1]} ${notification.time.year}"),
+                subtitle: SubTitle(formattedDate(notification.time)),
               ),
               children: [
                 SubTitle(

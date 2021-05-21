@@ -8,10 +8,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pig/providers/user_state_provider.dart';
 
 import '../../../../../../config/config.dart';
 
+import '../../../../../../models/notification/notification.dart' as n;
+
 import '../../../../../../widgets/global_utility_widgets.dart';
+// import '../../../../../../widgets/pig_scope_dialog.dart';
 
 import '../../../../providers/notifications_state_provider.dart';
 
@@ -54,73 +58,151 @@ class PostNotificationView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final Size _size = MediaQuery.of(context).size;
-    final double _sHeight = _size.height;
+    // final showNotificationScopeState =
+    //     watch(showNotificationScopeStateProvider.state);
 
+    // final scopeState = watch(scopeStateProvider.state);
+    final postTitleState = watch(postTitleStateProvider).state;
+    final postDescriptionState = watch(postDescriptionStateProvider).state;
+    // final authNotificationsState = watch(authNotificationsStateProvider.state);
+    final userState = watch(userStateProvider.state);
     return PigKeyboardDismissiableWrapper(
-      child: Container(
-        color: transparent,
-        height: _sHeight,
-        width: double.infinity,
-        child: BackdropFilter(
-          ///this blurs the [background] for a focused feeling
-          filter: ImageFilter.blur(
-            sigmaX: 5,
-            sigmaY: 5,
-          ),
-          child: Center(
-            child: PigPaddingContainer(
-              child: Container(
-                height: _sHeight * 0.7,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: white,
-                  borderRadius: deepBorderRadius,
-                  boxShadow: boxShadow,
-                ),
-                child: PigPaddingContainer(
-                  verticalPadding: true,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Heading2(
-                            'post notification',
-                            color: black,
-                          ),
+      child: GestureDetector(
+        onTap: () {
+          ///This checks for the [title] and [description] [if] both of them are [not null]
+          ///then it allows to [close] the [PostNotificationView]
+          if (postTitleState.isNotEmpty | postDescriptionState.isNotEmpty) {
+            buildShowDialog(context);
+          }
 
-                          ///[close] icon which closes the [PostNotificationView]
-                          PostNotificationViewCloseButton(),
+          ///or [else] it shows a [dialog] which asks if the user wants to [close] [PostNotificationView]
+          else {
+            context
+                .read(showPostNotificationStateProvider)
+                .showPostNotification();
+
+            ///if the user chose to [close] then the defaultValues are set to the [providers]
+            defaultValidation(context, values: true);
+            clearTitle(context);
+            postTitleController.text = "";
+            clearDescription(context);
+            postDescriptionController.text = "";
+          }
+        },
+        child: Container(
+          color: black.withOpacity(0.3),
+          height: screenHeight,
+          width: double.infinity,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 5,
+              sigmaY: 5,
+            ),
+            child: GestureDetector(
+              onTap: () {},
+              child: Center(
+                child: PigPaddingContainer(
+                  child: Container(
+                    height: screenHeight * 0.7,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: deepBorderRadius,
+                      boxShadow: boxShadow(),
+                    ),
+                    child: PigPaddingContainer(
+                      verticalPadding: true,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Heading2(
+                                'post notification',
+                                color: black,
+                              ),
+
+                              ///[close] icon which closes the [PostNotificationView]
+                              PostNotificationViewCloseButton(),
+                            ],
+                          ),
+                          Expanded(
+                            flex: 0,
+                            child: Center(
+                              ///[TextFeild] which takes the [title]
+                              child: PostTitleTextFeild(
+                                controller: postTitleController,
+                              ),
+                            ),
+                          ),
+                          const VSpacer(
+                            sizeFactor: SizeFactor.quater,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Center(
+                              ///[TextFeild] which takes the [description]
+                              child: PostDescriptionTextFeild(
+                                controller: postDescriptionController,
+                              ),
+                            ),
+                          ),
+                          const VSpacer(
+                            sizeFactor: SizeFactor.quater,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              if (postTitleState.isEmpty |
+                                  postDescriptionState.isEmpty) {
+                                // buildShowDialog(context);
+                                if (postTitleState.isEmpty) {
+                                  context
+                                      .read(postTitleValidationStateProvider)
+                                      .state = false;
+                                }
+                                if (postDescriptionState.isEmpty) {
+                                  context
+                                      .read(
+                                          postDescriptionValidationStateProvider)
+                                      .state = false;
+                                }
+
+                                // TODO need to post message that tilte and description are required.
+                              } else {
+                                context
+                                    .read(authNotificationsStateProvider)
+                                    .insToAuthNotifications(
+                                      n.Notification(
+                                        author: userState.name,
+                                        title: postTitleState,
+                                        description: postDescriptionState,
+                                        time: DateTime.now(),
+                                      ),
+                                    );
+                                context
+                                    .read(showPostNotificationStateProvider)
+                                    .showPostNotification();
+                                defaultValidation(context, values: true);
+                                clearTitle(context);
+                                postTitleController.text = "";
+                                clearDescription(context);
+                                postDescriptionController.text = "";
+                                // buildPigScopeDialog(context);
+                              }
+                            },
+                            child: const PigPaddingContainer(
+                              verticalPadding: true,
+                              child: SubText(
+                                "Next",
+                                bold: true,
+                              ),
+                            ),
+                          ),
+                          // const PostActions()
                         ],
                       ),
-                      Expanded(
-                        flex: 0,
-                        child: Center(
-                          ///[TextFeild] which takes the [title]
-                          child: PostTitleTextFeild(
-                            controller: postTitleController,
-                          ),
-                        ),
-                      ),
-                      const VSpacer(
-                        sizeFactor: SizeFactor.quater,
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Center(
-                          ///[TextFeild] which takes the [description]
-                          child: PostDescriptionTextFeild(
-                            controller: postDescriptionController,
-                          ),
-                        ),
-                      ),
-                      const VSpacer(
-                        sizeFactor: SizeFactor.quater,
-                      ),
-                      const PostActions()
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -249,8 +331,8 @@ class PostActions extends ConsumerWidget {
       },
       child: Container(
         height: 40.0,
-        decoration: const BoxDecoration(
-          boxShadow: lightBoxShadow,
+        decoration: BoxDecoration(
+          boxShadow: lightBoxShadow(),
           color: primaryColor,
           borderRadius: lightBorderRadius,
         ),
@@ -293,7 +375,7 @@ void clearDescription(BuildContext context) {
 
 ///it validates the [title] using regular expressions
 void validatePostTitle(BuildContext context) {
-  log('validating title...', name: "post validation");
+  // log('validating title...', name: "post validation");
 
   // final String title = context.read(postTitleStateProvider).state;
   final String title =
@@ -305,23 +387,23 @@ void validatePostTitle(BuildContext context) {
     context.read(postTitleValidationStateProvider).state = true;
   }
 
-  if (context.read(postTitleValidationStateProvider).state) {
-    log(
-      "This is a valid post title",
-      name: "post validation",
-    );
-  } else {
-    log(
-      "",
-      name: "post validation",
-      error: "invaild post title",
-    );
-  }
+  // if (context.read(postTitleValidationStateProvider).state) {
+  //   log(
+  //     "This is a valid post title",
+  //     name: "post validation",
+  //   );
+  // } else {
+  //   log(
+  //     "",
+  //     name: "post validation",
+  //     error: "invaild post title",
+  //   );
+  // }
 }
 
 ///it validates the [description] using regular expressions
 void validatePostDescription(BuildContext context) {
-  log('validating Description...', name: "post validation");
+  // log('validating Description...', name: "post validation");
   final String description = context
       .read(postDescriptionStateProvider)
       .state
@@ -332,15 +414,15 @@ void validatePostDescription(BuildContext context) {
   } else {
     context.read(postDescriptionValidationStateProvider).state = true;
   }
-  if (context.read(postDescriptionValidationStateProvider).state) {
-    log("This is a valid post description", name: "post validation");
-  } else {
-    log(
-      "",
-      name: "post validation",
-      error: "invaild post description",
-    );
-  }
+  // if (context.read(postDescriptionValidationStateProvider).state) {
+  //   log("This is a valid post description", name: "post validation");
+  // } else {
+  //   log(
+  //     "",
+  //     name: "post validation",
+  //     error: "invaild post description",
+  //   );
+  // }
 }
 
 ///makes the validation states to default i.e, [true]
@@ -406,3 +488,58 @@ Future buildShowDialog(BuildContext context) {
     },
   );
 }
+
+// Future buildScopeDialog(BuildContext context) {
+//   return showDialog(
+//       context: context,
+//       builder: (context) {
+//         return GestureDetector(
+//           onTap: () {
+//             Get.back();
+//           },
+//           child: Material(
+//             color: transparent,
+//             child: Padding(
+//               padding: EdgeInsets.symmetric(
+//                 horizontal: hPadding(1),
+//                 vertical: vPadding(5),
+//               ),
+//               child: GestureDetector(
+//                 onTap: () {},
+//                 child: PigCube(
+//                   height: screenHeight * 0.3,
+//                   width: double.infinity,
+//                   child: PigPaddingContainer(
+//                     child: Column(
+//                       children: [
+//                         const VSpacer(
+//                           sizeFactor: SizeFactor.quater,
+//                         ),
+//                         Container(
+//                           padding: const EdgeInsets.symmetric(
+//                             vertical: 4.0,
+//                             horizontal: 20.0,
+//                           ),
+//                           width: double.infinity,
+//                           decoration: BoxDecoration(
+//                             color: Colors.grey.withOpacity(0.5),
+//                             borderRadius: lightBorderRadius,
+//                           ),
+//                           child: const Heading2(
+//                             "scope",
+//                             color: black,
+//                           ),
+//                         ),
+//                         const Chip(
+//                           label: Text("4"),
+//                         )
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         );
+//       });
+// }

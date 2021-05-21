@@ -7,10 +7,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/route_manager.dart';
 
 import '../../../../../config/config.dart';
 
-import '../../../../../data/dummie_notifications_data.dart';
+// import '../../../../../data/dummie_notifications_data.dart';
 
 import '../../../../../widgets/global_utility_widgets.dart';
 
@@ -26,13 +27,16 @@ class AuthNotificationsView extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     // ignore: unused_local_variable
     final authNotificationsState = watch(authNotificationsStateProvider.state);
-    return GestureDetector(
-      onTap: () {
-        context
-            .read(showAuthNotificationsStateProvider)
-            .showAuthNotifications();
-      },
-      child: Container(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: white,
+        elevation: 0,
+        leading: PigArrow(
+          turns: 4,
+          onTap: () => Get.back(),
+        ),
+      ),
+      body: Container(
         color: transparent,
         height: screenHeight,
         width: double.infinity,
@@ -49,10 +53,10 @@ class AuthNotificationsView extends ConsumerWidget {
                 child: Container(
                   height: screenHeight * 0.8,
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: white,
                     borderRadius: deepBorderRadius,
-                    boxShadow: boxShadow,
+                    boxShadow: boxShadow(),
                   ),
                   child: PigPaddingContainer(
                     verticalPadding: true,
@@ -108,17 +112,57 @@ class AuthNotificationsView extends ConsumerWidget {
                             physics: const BouncingScrollPhysics(),
                             padding: const EdgeInsets.all(8.0),
                             //* use this for real data that need to be passed to the APP
-                            // children: authNotificationsState.map((val) {
-                            //   return AuthNotificationTile(notification: val);
-                            // }).toList(),
+                            children: authNotificationsState.isEmpty
+                                ? [
+                                    const Center(
+                                      child: SubText(
+                                        "oh you've not made any notifications.",
+                                        color: errorColor,
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        const SubText('you can add here.'),
+                                        IconButton(
+                                          tooltip: "post notification.",
+                                          splashColor: transparent,
+                                          highlightColor: transparent,
+                                          icon: const Icon(
+                                            Icons.add,
+                                            color: primaryColor,
+                                          ),
+                                          onPressed: () {
+                                            context
+                                                .read(
+                                                    showAuthNotificationsStateProvider)
+                                                .showAuthNotifications();
+
+                                            /// it allows the [Authorized] to open a [PostNotification]
+                                            context
+                                                .read(
+                                                    showPostNotificationStateProvider)
+                                                .showPostNotification();
+                                            // }
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ]
+                                : authNotificationsState.map((val) {
+                                    return AuthNotificationTile(
+                                      key: ObjectKey(val),
+                                      notification: val,
+                                    );
+                                  }).toList(),
 
                             //! THIS IS DUMMY DATA FROM [DATA] FOLDER
-                            children: notifications.map((val) {
-                              return AuthNotificationTile(
-                                key: ObjectKey(val),
-                                notification: val,
-                              );
-                            }).toList(),
+                            // children: notifications.map((val) {
+                            //   return AuthNotificationTile(
+                            //     key: ObjectKey(val),
+                            //     notification: val,
+                            //   );
+                            // }).toList(),
                           ),
                         ),
                       ],
