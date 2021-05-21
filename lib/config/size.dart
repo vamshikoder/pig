@@ -57,6 +57,9 @@ class VSpacer extends StatelessWidget {
       case SizeFactor.quater:
         _factor = 0.25;
         break;
+      case SizeFactor.min:
+        _factor = 0.12;
+        break;
       default:
         _factor = 1;
     }
@@ -84,6 +87,9 @@ class HSpacer extends StatelessWidget {
       case SizeFactor.quater:
         _factor = 0.25;
         break;
+      case SizeFactor.min:
+        _factor = 0.12;
+        break;
       default:
         _factor = 1;
     }
@@ -94,4 +100,4 @@ class HSpacer extends StatelessWidget {
   }
 }
 
-enum SizeFactor { full, half, quater, none }
+enum SizeFactor { full, half, quater, min, none }
