@@ -1,5 +1,5 @@
-import 'package:pig/models/scope/scope.dart';
-import 'package:pig/models/user/user.dart';
+import '/models/scope/scope.dart';
+import '/models/user/user.dart';
 
 List<User> students = const [
   User(

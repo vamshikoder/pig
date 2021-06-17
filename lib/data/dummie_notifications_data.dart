@@ -1,4 +1,4 @@
-import '../models/notification/notification.dart' as n;
+import '/models/notification/notification.dart' as n;
 
 ///[title] max [16] characters
 ///[description] max [600] characters

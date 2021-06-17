@@ -1,4 +1,4 @@
-import '../models/book/book.dart';
+import '/models/book/book.dart';
 
 final List<Book> recommendedBooks = [
   const Book(
