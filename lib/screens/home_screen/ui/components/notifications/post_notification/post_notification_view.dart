@@ -8,45 +8,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/providers/user_state_provider.dart';
-
-import '../../../../../../config/config.dart';
-
-import '../../../../../../models/notification/notification.dart' as n;
-
-import '../../../../../../widgets/global_utility_widgets.dart';
-// import '../../../../../../widgets/pig_scope_dialog.dart';
-
-import '../../../../providers/notifications_state_provider.dart';
 
 import './post_description_textfeild.dart';
 import './post_title_textfeild.dart';
 
-///this contains the [title]
-final postTitleStateProvider = StateProvider<String>((ref) {
-  return "";
-});
+import '/config/config.dart';
 
-///this contains the [description]
-final postDescriptionStateProvider = StateProvider<String>((ref) {
-  return "";
-});
+import '/models/notification/notification.dart' as n;
 
-///This [provider] is set to [true] if the [tile] posted is a vaild one
-final postTitleValidationStateProvider = StateProvider<bool>((ref) {
-  return true;
-});
+import '/providers/user_state_provider.dart';
 
-///This [provider] is set to [true] if the [description] posted is a vaild one
-final postDescriptionValidationStateProvider = StateProvider<bool>((ref) {
-  return true;
-});
+import '/screens/home_screen/providers/notifications_state_provider.dart';
 
-///[TextEditingController] for the [title] used to manipulate the [TextFeild]
-final TextEditingController postTitleController = TextEditingController();
-
-///[TextEditingController] for the [description] used to manipulate the [TextFeild]
-final TextEditingController postDescriptionController = TextEditingController();
+import '/widgets/global_utility_widgets.dart';
 
 class PostNotificationView extends ConsumerWidget {
   // final n.Notification notification;
@@ -351,88 +325,6 @@ class PostActions extends ConsumerWidget {
   }
 }
 
-///as the [text] in the [Title TextFeild] changes it updates the [title provider]
-void addToTitle(BuildContext context, String value) {
-  context.read(postTitleStateProvider).state = value;
-  validatePostTitle(context);
-}
-
-///as the [text] in the [Description TextFeild] changes it updates the [description provider]
-void addToDescription(BuildContext context, String value) {
-  context.read(postDescriptionStateProvider).state = value;
-  validatePostDescription(context);
-}
-
-/// it clears the [title provider]
-void clearTitle(BuildContext context) {
-  context.read(postTitleStateProvider).state = "";
-}
-
-/// it clears the [description provider]
-void clearDescription(BuildContext context) {
-  context.read(postDescriptionStateProvider).state = "";
-}
-
-///it validates the [title] using regular expressions
-void validatePostTitle(BuildContext context) {
-  // log('validating title...', name: "post validation");
-
-  // final String title = context.read(postTitleStateProvider).state;
-  final String title =
-      context.read(postTitleStateProvider).state.replaceAll(RegExp(r'\s'), "");
-
-  if (title.isEmpty | (title == "")) {
-    context.read(postTitleValidationStateProvider).state = false;
-  } else {
-    context.read(postTitleValidationStateProvider).state = true;
-  }
-
-  // if (context.read(postTitleValidationStateProvider).state) {
-  //   log(
-  //     "This is a valid post title",
-  //     name: "post validation",
-  //   );
-  // } else {
-  //   log(
-  //     "",
-  //     name: "post validation",
-  //     error: "invaild post title",
-  //   );
-  // }
-}
-
-///it validates the [description] using regular expressions
-void validatePostDescription(BuildContext context) {
-  // log('validating Description...', name: "post validation");
-  final String description = context
-      .read(postDescriptionStateProvider)
-      .state
-      .replaceAll(RegExp(r"\s"), "");
-
-  if (description.isEmpty | (description == "")) {
-    context.read(postDescriptionValidationStateProvider).state = false;
-  } else {
-    context.read(postDescriptionValidationStateProvider).state = true;
-  }
-  // if (context.read(postDescriptionValidationStateProvider).state) {
-  //   log("This is a valid post description", name: "post validation");
-  // } else {
-  //   log(
-  //     "",
-  //     name: "post validation",
-  //     error: "invaild post description",
-  //   );
-  // }
-}
-
-///makes the validation states to default i.e, [true]
-void defaultValidation(BuildContext context, {required bool values}) {
-  context.read(postDescriptionValidationStateProvider).state = values;
-  context.read(postTitleValidationStateProvider).state = values;
-  log("Making Providers to default", name: "post validation");
-  log("Making Editing Controllers to default", name: "post validation");
-}
-
 ///this shows an [AlertDialog] asks if the user wants to discard the post or not
 Future buildShowDialog(BuildContext context) {
   return showDialog(
@@ -488,58 +380,3 @@ Future buildShowDialog(BuildContext context) {
     },
   );
 }
-
-// Future buildScopeDialog(BuildContext context) {
-//   return showDialog(
-//       context: context,
-//       builder: (context) {
-//         return GestureDetector(
-//           onTap: () {
-//             Get.back();
-//           },
-//           child: Material(
-//             color: transparent,
-//             child: Padding(
-//               padding: EdgeInsets.symmetric(
-//                 horizontal: hPadding(1),
-//                 vertical: vPadding(5),
-//               ),
-//               child: GestureDetector(
-//                 onTap: () {},
-//                 child: PigCube(
-//                   height: screenHeight * 0.3,
-//                   width: double.infinity,
-//                   child: PigPaddingContainer(
-//                     child: Column(
-//                       children: [
-//                         const VSpacer(
-//                           sizeFactor: SizeFactor.quater,
-//                         ),
-//                         Container(
-//                           padding: const EdgeInsets.symmetric(
-//                             vertical: 4.0,
-//                             horizontal: 20.0,
-//                           ),
-//                           width: double.infinity,
-//                           decoration: BoxDecoration(
-//                             color: Colors.grey.withOpacity(0.5),
-//                             borderRadius: lightBorderRadius,
-//                           ),
-//                           child: const Heading2(
-//                             "scope",
-//                             color: black,
-//                           ),
-//                         ),
-//                         const Chip(
-//                           label: Text("4"),
-//                         )
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         );
-//       });
-// }

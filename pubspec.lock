@@ -264,7 +264,7 @@ packages:
     source: hosted
     version: "4.0.0"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -382,6 +382,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.13.1"
+  scroll_snap_list:
+    dependency: "direct main"
+    description:
+      name: scroll_snap_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.1"
   shelf:
     dependency: transitive
     description:
@@ -396,11 +403,25 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  simple_animations:
+    dependency: "direct main"
+    description:
+      name: simple_animations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
+  snap_scroll_physics:
+    dependency: "direct main"
+    description:
+      name: snap_scroll_physics
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+2"
   source_gen:
     dependency: transitive
     description:
@@ -450,27 +471,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  syncfusion_flutter_calendar:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_calendar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "19.1.58"
-  syncfusion_flutter_core:
+  supercharged:
     dependency: transitive
     description:
-      name: syncfusion_flutter_core
+      name: supercharged
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.1.58"
-  syncfusion_flutter_datepicker:
+    version: "2.0.0"
+  supercharged_dart:
     dependency: transitive
     description:
-      name: syncfusion_flutter_datepicker
+      name: supercharged_dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.1.58-beta"
+    version: "2.0.0"
   term_glyph:
     dependency: transitive
     description:
@@ -485,13 +499,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  timezone:
-    dependency: transitive
-    description:
-      name: timezone
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.0-nullsafety.0"
   timing:
     dependency: transitive
     description:

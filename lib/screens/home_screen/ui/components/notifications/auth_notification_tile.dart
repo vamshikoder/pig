@@ -22,17 +22,19 @@ import '../../../providers/notifications_state_provider.dart';
 
 class AuthNotificationTile extends StatelessWidget {
   final n.Notification notification;
+  final Color color;
   const AuthNotificationTile({
     Key? key,
     required this.notification,
+    required this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: white,
-        boxShadow: lightBoxShadow(),
+        color: color,
+        // boxShadow: lightBoxShadow(),
         borderRadius: lightBorderRadius,
       ),
       child: ClipRRect(
@@ -85,31 +87,33 @@ class AuthNotificationTile extends StatelessWidget {
             ),
           ),
           key: ObjectKey(notification),
-          child: Padding(
-            padding: EdgeInsets.all(hPadding(0.1)),
-            child: PigExpansionTile(
-              tilePadding: EdgeInsets.all(hPadding(0.25)),
-              expandedAlignment: Alignment.centerLeft,
-              backgroundColor: transparent,
-              childrenPadding: EdgeInsets.only(
-                right: hPadding(0.5),
-                left: hPadding(0.5),
-                bottom: vPadding(0.25),
-              ),
-              title: ListTile(
-                title: Heading2(
-                  notification.title,
-                  letterSpacing: 1.0,
-                ),
-                subtitle: SubTitle(formattedDate(notification.time)),
-              ),
-              children: [
-                SubTitle(
-                  notification.description,
-                  color: black,
-                ),
-              ],
+          child: PigExpansionTile(
+            // tilePadding: EdgeInsets.all(hPadding(0.25)),
+            expandedAlignment: Alignment.centerLeft,
+            backgroundColor: transparent,
+            childrenPadding: EdgeInsets.only(
+              right: hPadding(0.5),
+              left: hPadding(0.5),
+              bottom: vPadding(0.25),
             ),
+            title: ListTile(
+              title: Heading2(
+                notification.title,
+                letterSpacing: 1.0,
+                color: black,
+              ),
+              subtitle: SubTitle(
+                formattedDate(notification.time),
+                color: grey,
+                bold: true,
+              ),
+            ),
+            children: [
+              SubTitle(
+                notification.description,
+                color: black,
+              ),
+            ],
           ),
         ),
       ),

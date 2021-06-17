@@ -1,6 +1,8 @@
 //~ This is a custom calender.
 //& Made by PIG
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/route_manager.dart';
@@ -68,7 +70,10 @@ class UpcommingEvents extends ConsumerWidget {
                                   Get.to(
                                     () => EventCreator(),
                                     transition: Transition.downToUp,
-                                  );
+                                  )!
+                                      .then((value) {
+                                    log(value.toString());
+                                  });
                                   // final _date = DateTime.now();
 
                                   // /// opens a  [DatePicker] to select date for the [Event ]
@@ -186,33 +191,6 @@ class UpcommingEvents extends ConsumerWidget {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class EventDescriptionModalBottomSheet extends StatelessWidget {
-  final String date;
-  const EventDescriptionModalBottomSheet(
-    this.date, {
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: white,
-      height: 100,
-      width: double.infinity,
-      child: const Material(
-        color: transparent,
-        child: TextField(
-          key: Key('title'),
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.done,
-          maxLength: 30,
-          cursorColor: primaryColor,
         ),
       ),
     );

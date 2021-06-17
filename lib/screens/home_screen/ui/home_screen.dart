@@ -44,14 +44,13 @@ class BuildHome extends ConsumerWidget {
   const BuildHome({
     Key? key,
     required PigDrawerController controller,
-  })   : _controller = controller,
+  })  : _controller = controller,
         super(key: key);
 
   final PigDrawerController _controller;
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final showNotificationState = watch(showNotificationStateProvider.state);
     final showPostNotificationState =
         watch(showPostNotificationStateProvider.state);
     return Material(
@@ -63,7 +62,7 @@ class BuildHome extends ConsumerWidget {
         scaffold: HomeScaffold(
           controller: _controller,
         ),
-        scrollable: !(showNotificationState | showPostNotificationState),
+        scrollable: !showPostNotificationState,
       ),
     );
   }

@@ -10,7 +10,10 @@ import 'package:pig/screens/home_screen/ui/home_screen.dart';
 // import 'screens/library_screen/ui/components/book_screen/book_screen.dart';
 // import './screens/home/ui/home.dart';
 
-void main() => runApp(ProviderScope(child: PigApp()));
+void main() {
+  // get the user details bro app
+  runApp(ProviderScope(child: PigApp()));
+}
 
 //* This is the PigApp workspace use this for development.
 class PigApp extends StatelessWidget {

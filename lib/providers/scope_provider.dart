@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pig/models/scope/scope.dart';
+
+import '/models/scope/scope.dart';
 
 class ScopeNotifier extends StateNotifier<List<Scope>> {
   ScopeNotifier() : super([]);

@@ -97,10 +97,9 @@ class Notifications extends ConsumerWidget {
       height: screenHeight * 0.26,
       child: SingleChildScrollView(
         clipBehavior: Clip.none,
-        physics: const BouncingScrollPhysics(),
+        physics: const PageScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Row(
-          ///[notification] is a [list] which contains all the [notifications]
           children: notifications.map(
             (notification) {
               final Color _color = primaryColor.withOpacity(0.3);
@@ -109,27 +108,12 @@ class Notifications extends ConsumerWidget {
                 key: ObjectKey(notification),
                 notification: notification,
                 onTap: () {
-                  /// if there is already a notification is being shown or [postnotification] is [open]
-                  /// it won't show the [NotificationOverview]
-                  // if (!showNotificationState & !showPostNotificationState) {
-                  ///this sets the showNotification to [true] so that it opens the [NotificationOverview]
-                  context
-                      .read(notificationOverviewStateProvider)
-                      .selectNotification(notification);
-                  log(notification.title);
-                  // context
-                  //     .read(showNotificationStateProvider)
-                  //     .showNotification();
                   Get.to(
                     () => NotificationOverviewView(
-                      color: _color,
+                      // color: primaryColor,
                       notification: notification,
                     ),
                   );
-
-                  ///this sends the values of the card clicked to the [NotificationOverview]
-                  // context.read(notificationOverviewAnimationStateProvider)
-                  // }
                 },
               );
             },

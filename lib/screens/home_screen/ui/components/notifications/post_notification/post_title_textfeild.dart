@@ -7,9 +7,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../../config/config.dart';
+import '/config/config.dart';
 
-import './post_notification_view.dart';
+import '/screens/home_screen/providers/notifications_state_provider.dart';
 
 class PostTitleTextFeild extends ConsumerWidget {
   final TextEditingController controller;

@@ -3,8 +3,9 @@
 // ignore_for_file: use_setters_to_change_properties
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 
-import '../../../models/notification/notification.dart' as n;
+import '/models/notification/notification.dart' as n;
 
 //* global providers
 ///this provider gets the list of [notifications] that belongs to the [user]
@@ -25,40 +26,6 @@ final notificationStateProvider =
   return NotificationsNotifier();
 });
 
-///this tells if the [NotificationOverview] should be shown or not
-class ShowNotificationNotifier extends StateNotifier<bool> {
-  ShowNotificationNotifier() : super(false);
-
-  void showNotification() {
-    state = !state;
-  }
-}
-
-final showNotificationStateProvider =
-    StateNotifierProvider<ShowNotificationNotifier>((ref) {
-  return ShowNotificationNotifier();
-});
-
-///this store the details of the seleted [notification]
-class NotificationOverviewNotifier extends StateNotifier<n.Notification> {
-  NotificationOverviewNotifier()
-      : super(n.Notification(
-          title: "",
-          time: DateTime.now(),
-          author: "",
-          description: "",
-        ));
-
-  void selectNotification(n.Notification notification) {
-    state = notification;
-  }
-}
-
-final notificationOverviewStateProvider =
-    StateNotifierProvider<NotificationOverviewNotifier>((ref) {
-  return NotificationOverviewNotifier();
-});
-
 ///this tells if the [PostNotificationView] should be shown or not
 class ShowPostNotificationNotifier extends StateNotifier<bool> {
   ShowPostNotificationNotifier() : super(false);
@@ -76,6 +43,9 @@ final showPostNotificationStateProvider =
 //^ Authorized Notification providers
 //! DONOT MODIFY THESE!
 
+/// this contains all the notifications made by the user
+/// when inserted or a notification is made by the user
+/// it will be uploaded to the app storage and also to the server
 class AuthNotificationsNotifier extends StateNotifier<List<n.Notification>> {
   AuthNotificationsNotifier() : super([]);
 
@@ -104,26 +74,110 @@ final authNotificationsStateProvider =
   return AuthNotificationsNotifier();
 });
 
-class ShowAuthNotificationsNotifier extends StateNotifier<bool> {
-  ShowAuthNotificationsNotifier() : super(false);
-  void showAuthNotifications() {
-    state = !state;
-  }
-}
-
-final showAuthNotificationsStateProvider =
-    StateNotifierProvider<ShowAuthNotificationsNotifier>((ref) {
-  return ShowAuthNotificationsNotifier();
+///this contains the [title]
+final postTitleStateProvider = StateProvider<String>((ref) {
+  return "";
 });
 
-class ShowNotificationScopeNotifier extends StateNotifier<bool> {
-  ShowNotificationScopeNotifier() : super(false);
-  void showNotificationScope() {
-    state = !state;
-  }
+///this contains the [description]
+final postDescriptionStateProvider = StateProvider<String>((ref) {
+  return "";
+});
+
+///This [provider] is set to [true] if the [tile] posted is a vaild one
+final postTitleValidationStateProvider = StateProvider<bool>((ref) {
+  return true;
+});
+
+///This [provider] is set to [true] if the [description] posted is a vaild one
+final postDescriptionValidationStateProvider = StateProvider<bool>((ref) {
+  return true;
+});
+
+///[TextEditingController] for the [title] used to manipulate the [TextFeild]
+final TextEditingController postTitleController = TextEditingController();
+
+///[TextEditingController] for the [description] used to manipulate the [TextFeild]
+final TextEditingController postDescriptionController = TextEditingController();
+
+///as the [text] in the [Title TextFeild] changes it updates the [title provider]
+void addToTitle(BuildContext context, String value) {
+  context.read(postTitleStateProvider).state = value;
+  validatePostTitle(context);
 }
 
-final showNotificationScopeStateProvider =
-    StateNotifierProvider<ShowNotificationScopeNotifier>((ref) {
-  return ShowNotificationScopeNotifier();
-});
+///as the [text] in the [Description TextFeild] changes it updates the [description provider]
+void addToDescription(BuildContext context, String value) {
+  context.read(postDescriptionStateProvider).state = value;
+  validatePostDescription(context);
+}
+
+/// it clears the [title provider]
+void clearTitle(BuildContext context) {
+  context.read(postTitleStateProvider).state = "";
+}
+
+/// it clears the [description provider]
+void clearDescription(BuildContext context) {
+  context.read(postDescriptionStateProvider).state = "";
+}
+
+///it validates the [title] using regular expressions
+void validatePostTitle(BuildContext context) {
+  // log('validating title...', name: "post validation");
+
+  // final String title = context.read(postTitleStateProvider).state;
+  final String title =
+      context.read(postTitleStateProvider).state.replaceAll(RegExp(r'\s'), "");
+
+  if (title.isEmpty | (title == "")) {
+    context.read(postTitleValidationStateProvider).state = false;
+  } else {
+    context.read(postTitleValidationStateProvider).state = true;
+  }
+
+  // if (context.read(postTitleValidationStateProvider).state) {
+  //   log(
+  //     "This is a valid post title",
+  //     name: "post validation",
+  //   );
+  // } else {
+  //   log(
+  //     "",
+  //     name: "post validation",
+  //     error: "invaild post title",
+  //   );
+  // }
+}
+
+///it validates the [description] using regular expressions
+void validatePostDescription(BuildContext context) {
+  // log('validating Description...', name: "post validation");
+  final String description = context
+      .read(postDescriptionStateProvider)
+      .state
+      .replaceAll(RegExp(r"\s"), "");
+
+  if (description.isEmpty | (description == "")) {
+    context.read(postDescriptionValidationStateProvider).state = false;
+  } else {
+    context.read(postDescriptionValidationStateProvider).state = true;
+  }
+  // if (context.read(postDescriptionValidationStateProvider).state) {
+  //   log("This is a valid post description", name: "post validation");
+  // } else {
+  //   log(
+  //     "",
+  //     name: "post validation",
+  //     error: "invaild post description",
+  //   );
+  // }
+}
+
+///makes the validation states to default i.e, [true]
+void defaultValidation(BuildContext context, {required bool values}) {
+  context.read(postDescriptionValidationStateProvider).state = values;
+  context.read(postTitleValidationStateProvider).state = values;
+  // log("Making Providers to default", name: "post validation");
+  // log("Making Editing Controllers to default", name: "post validation");
+}

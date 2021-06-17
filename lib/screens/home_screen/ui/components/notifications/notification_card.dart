@@ -36,6 +36,7 @@ class NotificationCard extends StatelessWidget {
           child: PigCube(
             color: _color,
             // height: 125.0,
+            width: 160,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: vPadding(0.25),

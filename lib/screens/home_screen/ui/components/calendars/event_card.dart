@@ -43,6 +43,8 @@ class EventCard extends StatelessWidget {
               HSpacer(
                 sizeFactor: SizeFactor.quater,
               ),
+
+              ///[event] name
               SubText(
                 // event.eventName,
                 "MID Exams",
@@ -51,6 +53,8 @@ class EventCard extends StatelessWidget {
               HSpacer(
                 sizeFactor: SizeFactor.quater,
               ),
+
+              ///[event] start date.
               SubText(
                 // formattedDate(event.from),
                 "21 Apr 1982",
@@ -64,6 +68,8 @@ class EventCard extends StatelessWidget {
             ],
           ),
         ),
+
+        /// [author] of the [event]
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
@@ -80,15 +86,59 @@ class EventCard extends StatelessWidget {
             ),
           ],
         ),
-        children: const [
+        children: [
           PigPaddingContainer(
-            child: SubTitle(
-              // event.descripton
-              "people who are interseted in joining in hackthon conducted by ace engineering college shall give their namespeople",
-              color: black,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ///[from:] event is started.
+                Row(
+                  children: const [
+                    SubTitle(
+                      "From : ",
+                      color: white,
+                    ),
+                    SubTitle(
+                      '21 Apr 1982',
+                      color: black,
+                      bold: true,
+                    ),
+                    SubTitle(
+                      " 5:30 PM",
+                      color: grey,
+                    )
+                  ],
+                ),
+
+                ///[to] event is ended
+                Row(
+                  children: const [
+                    SubTitle(
+                      "To     : ",
+                      color: white,
+                    ),
+                    SubTitle(
+                      '20 Sep 2000',
+                      color: black,
+                      bold: true,
+                    ),
+                    SubTitle(
+                      " 5:30 PM",
+                      color: grey,
+                    )
+                  ],
+                ),
+                const Divider(),
+
+                ///[event] description
+                const SubTitle(
+                  "people who are interseted in joining in hackthon conducted by ace engineering college shall give their namespeople",
+                  color: black,
+                ),
+              ],
             ),
           ),
-          VSpacer(
+          const VSpacer(
             sizeFactor: SizeFactor.quater,
           )
         ],
