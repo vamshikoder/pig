@@ -32,4 +32,4 @@ for additional information
 
 ---
 ## License & Copyright
-© Vamshi Krishna, Charan Reddy
+© Vamshi Krishna.
