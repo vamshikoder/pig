@@ -27,7 +27,7 @@ then run.
 ```
 flutter run
 ```
-contact @vanhsirki or @charanreddy13.
+contact @vamshikoder
 for additional information
 
 ---
